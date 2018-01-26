@@ -52,5 +52,6 @@ $description = "Australia's largest university community to buy and sell textboo
 	
 	<body>
 		<h1>Index Page</h1>
+		<a href="/textbooks">textbooks</a>
 	</body>
 </html>

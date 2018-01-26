@@ -1,5 +1,11 @@
 RewriteEngine on
+# turns on mod_rewrite
 
 RewriteCond %{REQUEST_FILENAME} !-d
+# verifies that the requested FILE is not a directory
+
 RewriteCond %{REQUEST_FILENAME}.php -f
+# verifies that the requested FILE + .php exists as a file on the filesystem
+
 RewriteRule ^(.*)$ $1.php
+# executes the file found in the previous step
