@@ -38,7 +38,7 @@
         <!-- Normalize CSS -->
         <link rel="stylesheet" href="https://necolas.github.io/normalize.css/7.0.0/normalize.css">
         <!-- Font Awesome -->
-        <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link rel="stylesheet" type="text/css" href="/assets/css/app.css?<?php echo time(); ?>">
-        <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css?<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="/dist/css/app.css?<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="/dist/css/responsive.css?<?php echo time(); ?>">
