@@ -2,9 +2,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <title><?= 'Uni Study Mate | ' .$title ?></title>
+        <title><?= 'UniStudyMate | ' .$title ?></title>
         <meta name="description" content="<?= $description ?>">
-        <meta name="author" content="Uni Study Mate">
+        <meta name="author" content="UniStudyMate">
 
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="/dist/img/favicon/apple-touch-icon.png?v=kPg5dmjPmB">
@@ -23,7 +23,7 @@
         ?>
 
         <!-- Facebook -->
-        <meta property="og:title" content="<?= 'Uni Study Mate | ' .$title ?>">
+        <meta property="og:title" content="<?= 'UniStudyMate | ' .$title ?>">
         <meta property="og:type" content="website">
         <meta property="og:url" content="<?= $configurl ?>">
         <meta property="og:description" content="<?= $description ?>">
@@ -31,7 +31,7 @@
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="<?= 'Uni Study Mate | ' .$title ?>" />
+        <meta name="twitter:title" content="<?= 'UniStudyMate | ' .$title ?>" />
         <meta name="twitter:description" content="<?= $description ?>" />
         <meta name="twitter:image:src" content="<?= $configurl ?>/dist/img/favicon/android-chrome-256x256.jpg" />
 
