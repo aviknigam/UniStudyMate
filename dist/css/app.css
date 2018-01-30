@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,500,600');
+@import url('https://fonts.googleapis.com/css?family=Lobster|Roboto:400,500');
 
 html, body {
     margin: 0px;
@@ -6,80 +6,170 @@ html, body {
 
 body {
     background: #ffffff;
-    color: #616366;
+    color: #444444;    
     font-family: "Raleway", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    padding-top: 76px;
+    font-size: 18px;
+    font-weight: 400;
 }
 
-.flex {
-    display: flex;
-}
+/* Flexbox */
+    .flex {
+        display: flex;
+    }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #363b40;
-    font-weight: 500;
-    margin: 0px;
-}
+    .ffrowwrap {
+        flex-flow: row wrap;
+    }
 
-.container {
-    padding: 25px 20px 35px 20px;
-}
+    .ffcolwrap {
+        flex-flow: column wrap;
+    }
 
-/* Navbar */
-    .navbar {
+    .justify-content-center {
+        justify-content: center;
+    }
+
+    .align-items-center {
         align-items: center;
-        background: #026FCE;
-        background: linear-gradient(90deg, #0B4182 1%, #1e88e5 64%, #40BAF5 97%);
+    }
+
+    .text-align-center {
+        text-align: center;
+    }
+
+/* Configuration */
+    .page-section {
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 500;
+    }
+
+    .bg-white {
+        background: #FFFFFF;
+    }
+    
+    .bg-blue {
+        background: #0070BA;
+        background: linear-gradient(45deg, #0B4182 1%, #1e88e5 64%, #40BAF5 97%);
+        background-image: -ms-linear-gradient(45deg, #0B4182 1%, #1e88e5 64%, #40BAF5 97%);
+        background-image: -moz-linear-gradient(45deg, #0B4182 1%, #1e88e5 64%, #40BAF5 97%);
+        background-image: -o-linear-gradient(45deg, #0B4182 1%, #1e88e5 64%, #40BAF5 97%);
+        background-image: -webkit-linear-gradient(45deg, #0B4182 1%, #1e88e5 64%, #40BAF5 97%);
+        background-image: linear-gradient(45deg, #0B4182 1%, #1e88e5 64%, #40BAF5 97%);
+    }
+
+    .h-grey {
+        color: #363b40;
+    }
+
+    .h-white, .text-white {
         color: #FFFFFF;
-        height: 76px;
-        padding: 0px 10px;
-        position: fixed;
-        transition: all 0.2s ease-in-out;
-        width: 100%;
     }
 
-    .navbar-hidden {
-        top: -76px;
-        opacity: 0;
+    .text-d-white {
+        color: #e3e6e9;
     }
 
-    .navbar-visible {
-        top: 0px;
-        opacity: 1;
+    .text-grey {
+        color: #444444;
     }
 
-    .navbar a {
-        color: #FFFFFF;
-        display: inline-block;
+    a {
         text-decoration: none;
     }
 
     .brand {
-        font-size: 1.5em;
-        letter-spacing: 3px;
-        text-transform: capitalize;
+        font-family: "Lobster", cursive;
+    }
+
+/* Navbar */
+    .navbar {
+        color: #0070BA;
+        height: 76px;
+        transition: all 0.2s ease-in-out;
+        width: 100%;
+    }
+
+    .navbar a {
+        color: #0070BA;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .navbar .brand {
+        font-size: 1.78em;
     }
 
 /* Landing */
     .landing {
-        background: #026FCE;
-        background: linear-gradient(90deg, #0B4182 1%, #1e88e5 64%, #40BAF5 97%);
-        color: #c4e3ffcc;
-        flex-flow: row wrap;
-        padding-top: 80px;
-    }
-
-    .left, .right {
-        flex-basis: 100%;
-        flex-flow: column wrap;
-        align-items: center;
         text-align: center;
     }
 
     .landing-heading {
+        font-size: 2.33em;
+    }
+
+    .landing img {
+        height: 200px;
+        width: auto;
+    }
+
+/* Buttons */
+    .btn {
+        border-radius: 5px;
+        padding: 10px 15px;
+        text-align: center;
+    }
+
+    .btn-dark {
+        background: #0070BA;
+        border: 1px solid #FFFFFF;
         color: #FFFFFF;
-        font-size: 1.875em;
-        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .btn-dark:hover {
+        background: #FFFFFF;
+        border: 1px solid #000000;
+        color: #0070BA;
+    }
+
+    .btn-light {
+        background: #FFFFFF;
+        border: 1px solid #0070BA;
+        color: #0070BA;
+        transition: all 0.2s;
+    }
+
+    .btn-light:hover {
+        background: #0070BA;
+        border: 1px solid #0070BA;
+        color: #FFFFFF;
+    }
+
+    .btn-transparent {
+        background: transparent;        
+    }
+
+    .btn-block {
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+/* Footer */
+    .footer {
+        justify-content: space-between;
+    }
+
+    .footer a {
+        color: #FFFFFF;
+        text-decoration: none;
     }
