@@ -17,8 +17,14 @@ $description = "Australia's largest university community to buy and sell textboo
 			<?php include 'includes/navbar.php'; ?>
 
 		<!-- Landing -->
-			<div class="landing">
-				<h1 class="landing-heading">Index Page</h1>
+			<div class="page-section bg-blue">
+				<div class="container">
+					<div class="landing text-d-white">
+						<h1 class="landing-heading h-white">Welcome to <span class="brand">UniStudyMate!</span></h1>
+						<p>Studying at university made easy! Exchange textbooks, notes, subject reviews and even find tutors!</p>
+						<p></p>
+					</div>
+				</div>
 			</div>
 
 		<!-- Scripts -->
