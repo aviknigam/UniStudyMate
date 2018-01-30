@@ -1,4 +1,4 @@
-# uni-study-mate
+# UniStudyMate
 University Study Mate assists students in exchanging textbooks, notes and finding tutors.
 
 <u>Progression Plan / Rollout</u>
