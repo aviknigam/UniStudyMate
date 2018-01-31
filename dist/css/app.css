@@ -6,10 +6,11 @@ html, body {
 
 body {
     background: #ffffff;
-    color: #444444;    
+    color: #444444;
     font-family: "Raleway", Helvetica, Arial, sans-serif;
     font-size: 18px;
     font-weight: 400;
+    padding-top: 50px;
 }
 
 /* Flexbox */
@@ -19,6 +20,10 @@ body {
 
     .ffrowwrap {
         flex-flow: row wrap;
+    }
+
+    .ffrownowrap {
+        flex-flow: row nowrap;
     }
 
     .ffcolwrap {
@@ -44,6 +49,8 @@ body {
     }
 
     .container {
+        margin-left: auto;
+        margin-right: auto;
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -92,21 +99,97 @@ body {
 
 /* Navbar */
     .navbar {
-        color: #0070BA;
-        height: 76px;
-        transition: all 0.2s ease-in-out;
+        background-color: #FFFFFF;
+        box-shadow: 0 0 40px #252d3380;
+        justify-content: center;
+        height: 50px;
+        transition: all 0.5s ease-in-out;
         width: 100%;
     }
 
-    .navbar a {
+    .navbar-fixed {
+        position: fixed;
+        top: 0;
+    }
+
+    .left-toggle {
+        font-size: 25px;
+        position: absolute;
+        left: 8px;
+    }
+
+    .right-toggle {
+        font-size: 25px;
+        position: absolute;
+        right: 8px;
+    }
+
+    .navbar-header {
+
+    }
+    
+    .navbar .brand {
         color: #0070BA;
-        display: inline-block;
+        font-size: 1.78em;
+    }
+
+    .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 60px 0 0 0;
+    }
+
+    .navbar ul li a {
+        color: #444444;
+        display: block;
+        padding: 15px 20px;
+        text-align: center;
         text-decoration: none;
     }
 
-    .navbar .brand {
-        font-size: 1.78em;
+    .navbar ul li.special a {
+        background-color: #e67e22;
+        color: #FFFFFF;
     }
+
+    .navbar ul li a:hover, .navbar ul li.active a:hover {
+        background-color: #0070BA;
+        color: #FFFFFF;
+    }
+    
+    .navbar ul li.active a {
+        color: #0070BA;
+    }
+
+    @media (max-width: 991px) {
+        .left-slide, .right-slide {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            height: 100%;
+            -webkit-transition: linear background .15s;
+            transition: linear background .15s;
+            visibility: hidden;
+            width: 100%;
+        }
+
+        .left-slide-open, .right-slide-open {
+            z-index: 1;
+            background-color: #ffffff;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .left-toggle-active, .right-toggle-active {
+            z-index: 2; 
+        }
+    }
+
+    .navbar a {
+ 
+    }
+
 
 /* Landing */
     .landing {
