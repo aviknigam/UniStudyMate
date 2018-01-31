@@ -1,9 +1,8 @@
 <?php
-
-require __DIR__ . '/core/init.php';
-$title = "Exchange Textbooks, Notes and Find Tutors!";
-$description = "Australia's largest university community to buy and sell textbooks, notes and even find tutors for specific university courses!";
-
+	require __DIR__ . '/core/init.php';
+	$title = "Exchange Textbooks, Notes and Find Tutors!";
+	$description = "Australia's largest university community to buy and sell textbooks, notes and even find tutors for specific university courses!";
+	$navbar = 'index';
 ?>
 
 <!DOCTYPE html>
