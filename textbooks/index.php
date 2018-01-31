@@ -1,7 +1,8 @@
 <?php
-require __DIR__ . '/../core/init.php';
-$title = 'Buy and Sell Textbooks';
-$description = 'Buy and sell university textbooks for affordable prices.';
+    require __DIR__ . '/../core/init.php';
+    $title = 'Buy and Sell Textbooks';
+    $description = 'Buy and sell university textbooks for affordable prices.';
+    $navbar = 'textbooks';
 ?>
 
 <!DOCTYPE html>
