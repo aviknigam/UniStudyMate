@@ -48,7 +48,7 @@
                         <tbody>
                             <?php
                                 // Listings Query
-                                $listings_query = "SELECT * FROM listings WHERE listingType = 'textbook' ORDER BY listingPrice ASC";
+                                $listings_query = "SELECT * FROM listings WHERE listingType = 'textbook' ORDER BY listingID DESC";
                                 $listings_query = $conn->query($listings_query);
 
                                 while ($row = $listings_query->fetch_assoc()) {
