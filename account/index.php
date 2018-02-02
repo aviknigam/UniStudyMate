@@ -17,14 +17,17 @@
 			<?php include '../includes/navbar.php'; ?>
 
 		<!-- Landing -->
-			<div class="page-section bg-blue">
+			<div class="page-section">
 				<div class="container">
 				
 				</div>
 			</div>
 
+		<!-- Footer -->
+			<?php include '../includes/footer.php'; ?>
+			
 		<!-- Scripts -->
-			<?php include 'includes/scripts.php'; ?>
+			<?php include '../includes/scripts.php'; ?>
 			
 	</body>
 </html>
