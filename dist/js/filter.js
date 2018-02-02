@@ -1,3 +1,5 @@
+// filter.js is used in /textbooks/index to filter through the available textbooks on sale list
+
 var $rows = $('#table tr');
 
 $('#search').keyup(function() {
