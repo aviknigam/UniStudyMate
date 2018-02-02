@@ -6,3 +6,6 @@
         </div>
     </div>
 </div>
+
+<!-- Scripts -->
+<script src="/dist/js/navbar.js"></script>
