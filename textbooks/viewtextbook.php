@@ -14,10 +14,10 @@ $listingSlug = $urlSlug;
 $stmt->execute();
 
 // Need get_result() to give the result to
-$result = $stmt->get_result();
+$listingResult = $stmt->get_result();
 
 // Exit if we cannot find the post in SQL
-if(!$result->num_rows > 0) {
+if(!$listingResult->num_rows > 0) {
 	header("Location: /404");
     exit;
 }
@@ -25,7 +25,12 @@ if(!$result->num_rows > 0) {
 // ------------ IF THERE IS A POST --------------------------
 
 // Fetch assoc turns it into a usable array
-$row = $result->fetch_assoc();
+$listing = $listingResult->fetch_assoc();
+$textbookID = $listing['textbookID'];
+
+// LEFT JOIN textbooks
+$textbooks_stmt = $conn->query("SELECT * FROM textbooks LEFT JOIN listings on textbooks.textbookID = listings.textbookID WHERE listings.textbookID = $textbookID");
+$textbooks = $textbooks_stmt->fetch_assoc();
 
 $title = 'Buy and Sell Textbooks';
 $description = 'Buy and sell university textbooks for affordable prices.';
@@ -44,9 +49,16 @@ $navbar = 'textbooks';
             <?php include '../includes/navbar.php'; ?>
 
         <!-- Landing -->
-            <div class="page-section bg-blue">
-                <div class="container landing text-d-white">
-                    <h1>$ <?= $row['listingPrice']; ?></h1>
+            <div class="page-section">
+                <div class="container">
+                    <h1 style="h-grey">Buy <?= $textbooks['textbookTitle']?></h1>
+                    <p>ISBN: <?= $textbooks['textbookISBN']?></p>
+                    <p>Year: <?= $textbooks['textbookYear']?></p>
+                    <p>Edition: <?= ordinal($textbooks['textbookEdition'])?></p>
+                    <p>Author: <?= $textbooks['textbookAuthor']?></p>
+                    <p>Description: <?= $listing['listingDescription']; ?></p>
+                    <p>Price: $<?= $listing['listingPrice']; ?></p>
+                    <img src="<?= $textbooks['textbookURL']; ?>" class="" alt="Contact the seller below to buy <?= $textbooks['textbookTitle']?>!">
                 </div>
             </div>
           
