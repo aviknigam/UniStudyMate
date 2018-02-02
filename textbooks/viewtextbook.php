@@ -19,7 +19,7 @@ $listingResult = $stmt->get_result();
 // Exit if we cannot find the post in SQL
 if(!$listingResult->num_rows > 0) {
 	header("Location: /404");
-    exit;
+	exit;
 }
 
 // ------------ IF THERE IS A POST --------------------------
@@ -39,28 +39,31 @@ $navbar = 'textbooks';
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <?php include '../includes/head.php'; ?>
-        <link rel="stylesheet" type="text/css" href="/dist/css/textbooks.css?<?php echo time(); ?>">
-    </head>
+	<head>
+		<?php include '../includes/head.php'; ?>
+		<link rel="stylesheet" type="text/css" href="/dist/css/textbooks.css?<?php echo time(); ?>">
+	</head>
 
-    <body>
-        <!-- Navbar -->
-            <?php include '../includes/navbar.php'; ?>
+	<body>
+		<!-- Navbar -->
+			<?php include '../includes/navbar.php'; ?>
 
-        <!-- Landing -->
-            <div class="page-section">
-                <div class="container">
-                    <h1 style="h-grey">Buy <?= $textbooks['textbookTitle']?></h1>
-                    <p>ISBN: <?= $textbooks['textbookISBN']?></p>
-                    <p>Year: <?= $textbooks['textbookYear']?></p>
-                    <p>Edition: <?= ordinal($textbooks['textbookEdition'])?></p>
-                    <p>Author: <?= $textbooks['textbookAuthor']?></p>
-                    <p>Description: <?= $listing['listingDescription']; ?></p>
-                    <p>Price: $<?= $listing['listingPrice']; ?></p>
-                    <img src="<?= $textbooks['textbookURL']; ?>" class="" alt="Contact the seller below to buy <?= $textbooks['textbookTitle']?>!">
-                </div>
-            </div>
-          
-    </body>
+		<!-- Landing -->
+			<div class="page-section">
+				<div class="container">
+					<h1 style="h-grey">Buy <?= $textbooks['textbookTitle']?></h1>
+					<p>ISBN: <?= $textbooks['textbookISBN']?></p>
+					<p>Year: <?= $textbooks['textbookYear']?></p>
+					<p>Edition: <?= ordinal($textbooks['textbookEdition'])?></p>
+					<p>Author: <?= $textbooks['textbookAuthor']?></p>
+					<p>Description: <?= $listing['listingDescription']; ?></p>
+					<p>Price: $<?= $listing['listingPrice']; ?></p>
+					<img src="<?= $textbooks['textbookURL']; ?>" class="" alt="Contact the seller below to buy <?= $textbooks['textbookTitle']?>!">
+				</div>
+			</div>
+
+		<!-- Footer -->
+			<?php include '../includes/footer.php'; ?>
+
+	</body>
 </html>
