@@ -19,9 +19,11 @@
 		<!-- Landing -->
 			<div class="page-section">
 				<div class="container">
-                    <label for="textbookISBN">Textbook ISBN (no dashes): </label>
-                    <input type="text" name="textbookISBN" id="textbookISBN">
-                    <button id="search">Search</button>
+                    <form id="textbookSearch">
+                        <label for="textbookISBN">Textbook ISBN (no dashes): </label>
+                        <input type="text" name="textbookISBN" id="textbookISBN">
+                        <button id="search">Search</button>
+                    </form>
 				</div>
 			</div>
         
@@ -29,7 +31,7 @@
             <div class="page-section">
                 <div class="container">
                     <div id="searchResults">
-                        
+
                     </div>
                 </div>
             </div>
