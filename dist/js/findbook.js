@@ -1,17 +1,22 @@
 // findbook.js is used in /account/sell to send an AJAX request to findbook.php
-document.getElementById('search').addEventListener('click', findBook);
+document.getElementById('textbookSearch').addEventListener('submit', findBook);
 var searchResults = document.getElementById('searchResults');
 
-function findBook() {
+function findBook(e) {
+    // Disable normal form function
+    e.preventDefault();
+
+    var textbookISBN = document.getElementById('textbookISBN').value;
+
     // Create XHR Object
     var xhr = new XMLHttpRequest();
 
     // OPEN - type, url/file, async
-    xhr.open("GET", "findbook.php", true);
+    xhr.open("GET", "findbook.php?url=" + textbookISBN, true);
 
     // Loading animation
     xhr.onprogress = function() {
-
+        var loaderImg = 
     }
 
     // onload means xhr.readystate = 4 (request finished and response is ready) //
