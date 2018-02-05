@@ -1,10 +1,31 @@
 <?php
 require __DIR__ . '/../core/init.php';
 
-// Use StudentVIP and delete this line
+$url = sanitize($_GET['url']);
+
+// Prepare the statement -> not querying just yet
+$sql = $conn->prepare("SELECT * FROM textbooks WHERE textbookISBN = ?");
+
+// Bind the parameters
+$sql->bind_param("s", $textbookISBN);
+$textbookISBN = $url;
+
+// Execute query
+$sql->execute();
+
+// Need get_result() to give the result to
+$result = $sql->get_result();
+
+// Exit if we cannot find the post in SQL
+if(!$result->num_rows > 0) {
+	header("Location: /404");
+    exit;
+}
 
 // $html = file_get_contents('https://isbndb.com/book/' . $_GET['url']);
-$html = file_get_contents('http://isbnsearch.org/isbn/' . $_GET['url']);
+
+// Url doesn't allow file_get_contents
+// $html = file_get_contents('http://isbnsearch.org/isbn/' . $_GET['url']);
 
 preg_match("'<h1>(.*?)</h1>'si", $html, $textbookTitle);
 preg_match("'<p><strong>Published:</strong>^(\s*.*?\s).*'si", $html, $textbookYear);
