@@ -15,14 +15,17 @@ function findBook(e) {
     xhr.open("GET", "findbook.php?url=" + textbookISBN, true);
 
     // Loading animation
-    xhr.onprogress = function() {
-        var loaderImg = 
-    }
+    // xhr.onprogress = function() {
+        document.getElementById('loader').classList.remove('hide');
+        document.getElementById('loader').classList.add('show');
+    // }
 
     // onload means xhr.readystate = 4 (request finished and response is ready) //
     xhr.onload = function() {
         // Returns the status-number of a request (200: "OK") //
         if (this.status == 200) {
+        document.getElementById('loader').classList.remove('show');
+        document.getElementById('loader').classList.add('hide');
             searchResults.innerHTML = this.responseText;
         } else if (this.status == 404) {
             searchResults.innerHTML = 'Not found';
