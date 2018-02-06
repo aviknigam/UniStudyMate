@@ -26,8 +26,5 @@
 		<!-- Footer -->
 			<?php include '../includes/footer.php'; ?>
 			
-		<!-- Scripts -->
-			<?php include '../includes/scripts.php'; ?>
-			
 	</body>
 </html>
