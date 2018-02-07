@@ -5,3 +5,38 @@
 .hide {
     display: none;
 }
+
+/* Table */
+.table {
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 2px;
+    border-color: grey;
+    display: block;
+    font-size: 0.77em;
+    overflow-x: auto;
+    max-width: 100%;
+    width: 100%;
+}
+
+tr {
+    border-top: solid 2px #D9D9D9;
+}
+
+tr:hover {
+    background-color: #00000013;
+}
+
+.table td, .table th {
+    padding: .75rem;
+    border-top: 1px solid #eceeef;
+    vertical-align: top;
+}
+
+.textbook-link {
+    color: #0070BA;
+}
+
+.search-img {
+
+}
