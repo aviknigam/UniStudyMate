@@ -16,6 +16,8 @@
         <?php 
             if (!isset($_SESSION['userID'])) {
                 echo '<li><a href="/account/"><i class="fas fa-fw fa-sign-in-alt"></i> Log In</a></li>';
+            } elseif ($navbar == 'account') {
+                echo '<li class="active"><a href="/account/"><i class="far fa-fw fa-user"></i> Account</a></li>';
             } else {
                 echo '<li><a href="/account/"><i class="far fa-fw fa-user"></i> Account</a></li>';
             }
