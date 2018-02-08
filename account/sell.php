@@ -45,7 +45,8 @@
 						<p>Typical location of an ISBN is on the back of the book.</p>
                     </div>
                 </div>
-            </div>
+			</div>
+			
 		<!-- Footer -->
 			<?php include '../includes/footer.php'; ?>
 			<script src="/dist/js/findbook.js"></script>
