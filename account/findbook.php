@@ -74,6 +74,23 @@ if(!$result->num_rows > 0) {
 			</table>
 		</div>";
 
+} else {
+	// If we found a result from the database
+	$row = $result->fetch_assoc();
+
+	echo "
+		<div class='flex justify-content-center'>
+			<img src='$row[textbookURL]' class='search-img' alt='A picture for $row[textbookTitle] is not available at the moment'>
+			<table class='table'>
+				<tbody>
+					<tr><td><strong>Title</strong></td> <td>$row[textbookTitle]</td>
+					<tr><td><strong>Year</strong></td> <td>$row[textbookYear]</td>
+					<tr><td><strong>Authors</td></strong> <td>$row[textbookAuthor]</td>
+					<tr><td><strong>Edition</strong></td> <td>" .ordinal($row['textbookEdition']). "</td>
+				</tbody>
+			</table>
+		</div>
+	";
 }
 
 
