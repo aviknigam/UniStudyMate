@@ -32,10 +32,11 @@ if(!$result->num_rows > 0) {
 		$textbookTitle = $textbookTitle[1];
 	}
 
-	if (!preg_match("'<th>Publish Date</th> <td>(.*?)-'si", $html1, $textbookYear)) {
+	if (!preg_match("'<th>Publish Date</th> <td>(.*?)</td>'", $html1, $textbookYear)) {
 		$textbookYear = '-';
 	} else {
-		$textbookYear = $textbookYear[1];
+		preg_match("/[0-9]{1,4}/", $textbookYear[1], $textbookYear);
+		$textbookYear = $textbookYear[0];
 	}
 
 	if (!preg_match_all("'<a href=\"/author/(.*?)\">'si", $html1, $textbookAuthor)) {
@@ -45,21 +46,24 @@ if(!$result->num_rows > 0) {
 	}
 
 	if (!preg_match("'<th>Edition</th> <td>(.*?)</td>'si", $html1, $textbookEdition)) {
-		$textbookEdition = '';
+		$textbookEdition = '-';
 	} else {
-		$textbookEdition = $textbookEdition[1];
+		$textbookEdition = preg_replace("/[^0-9]/", '', $textbookEdition[1]);
 	}
 
 	if (!preg_match("'<object height=\"250px\" width=\"190px\" data=\"(.*?)\"'si", $html1, $textbookURL)) {
-		$textbookURL = '';
+		$textbookURL = '-';
 	} else {
 		$textbookURL = $textbookURL[1];
 	}
 	
 	// Insert into database
-	$sql =	$conn->prepare("INSERT INTO textbooks (textbookISBN, textbookTitle, textbookYear, textbookAuthor, textbookEdition, textbookURL) VALUES (?, ?, ?, ?, ?, ?)");
-	$sql->bind_param("ssssss", $textbookISBN, $textbookTitle, $textbookYear, $textbookAuthor, $textbookEdition, $textbookURL);
-	$sql->execute();
+	if ($textbookTitle != '-') {
+		$sql =	$conn->prepare('INSERT INTO textbooks (`textbookISBN`, `textbookTitle`, `textbookYear`, `textbookAuthor`, `textbookEdition`, `textbookURL`) VALUES (?, ?, ?, ?, ?, ?)');
+		$sql->bind_param("ssssss", $textbookISBN, $textbookTitle, $textbookYear, $textbookAuthor, $textbookEdition, $textbookURL);
+		$sql->execute();
+	}
+
 
 	echo "
 		<div class='flex justify-content-center'>
