@@ -47,24 +47,43 @@
 		<!-- Navbar -->
 			<?php include '../includes/navbar.php'; ?>
 
+		<!-- If not logged in, display login form -->
+			<?php
+				if(!isset($_SESSION['userID'])) {
+					echo '
+						<div class="page-section">
+							<div class="container">
+								<h1 class="h-grey landing-heading">Log in to <span class="brand">UniStudyMate:</span></h1>
+								<form action="" method="POST" class="page-section login-form">
+									<input type="email" name="email" placeholder="Email address" required autofocus>
+									<input type="password" name="password" placeholder="Password" required>
+									<button class="btn btn-dark btn-block" name="submit">Login</button>
+								</form>
+								<div class="flex ffcolwrap align-items-center text-grey">
+									<p><a href="/account/recover">Forgot password?</a></p>
+									<a href="/account/register"><button class="btn btn-light">Sign up for free</button></a>
+								</div>
+							</div>
+						</div>
+					';
+					include '../includes/footer.php';
+					die();
+				}
+			?>
+
 		<!-- Landing -->
-			<div class="page-section">
-				<div class="container">
-					<!-- If not logged in, display login form -->
-						<?php
-							if(!isset($_SESSION['userID'])) {
-								echo '
-									<h1 class="h-grey landing-heading">Log in to <span class="brand">UniStudyMate:</span></h1>
-									<form action="" method="POST" class="login-form">
-										<input type="email" name="email" placeholder="Email address" required autofocus>
-										<input type="password" name="password" placeholder="Password" required>
-										<button class="btn btn-dark btn-block" name="submit">Login</button>
-									</form>
-								';
-							}
-						?>
+			<?php
+				$userID = $_SESSION['userID'];
+				$sql_users = $conn->query("SELECT * FROM users WHERE userID = $userID");
+				$sql_users = $sql_users->fetch_assoc();
+			?>
+			<div class="page-section bg-blue">
+				<div class="container landing text-d-white">
+					<h1 class="h-white landing-heading">Welcome <?= $sql_users['userName'];?>!</h1>
+					
 				</div>
 			</div>
+					
 
 		<!-- Footer -->
 			<?php include '../includes/footer.php'; ?>
