@@ -34,6 +34,8 @@
                     <?php
                         if (!isset($_SESSION['userID'])) {
                             echo '<a href="/account/register" class="btn btn-dark btn-block">Create an Account</a>';
+                        } else {
+                            echo '<a href="/account/sell" class="btn btn-dark btn-block">Sell a Textbook</a>';
                         }
                     ?>
                     <h2 class="h-grey">Browse the Latest Textbooks</h2>
