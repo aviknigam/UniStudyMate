@@ -1,7 +1,7 @@
 <?php
 	require __DIR__ . '/../core/init.php';
 	$title = 'View Account';
-	$description = 'List your textbooks for sale, add subject reviews and advertise yourself as a University tutor!';
+	$description = 'List your textbooks and notes for sale, add subject reviews and advertise yourself as a University tutor!';
 	$navbar = 'account';
 
 	if(isset($_POST['submit'])) {
@@ -70,20 +70,82 @@
 					die();
 				}
 			?>
-
-		<!-- Landing -->
+		<!-- Once logged in -->
 			<?php
 				$userID = $_SESSION['userID'];
 				$sql_users = $conn->query("SELECT * FROM users WHERE userID = $userID");
 				$sql_users = $sql_users->fetch_assoc();
 			?>
+		<!-- Landing -->
 			<div class="page-section bg-blue">
 				<div class="container landing text-d-white">
 					<h1 class="h-white landing-heading">Welcome <?= $sql_users['userName'];?>!</h1>
-					
+					<p>Feel free to list your textbooks on sale.</p>
 				</div>
 			</div>
-					
+		
+		<!-- Sell Textbooks -->
+			<div class="page-section">
+				<div class="container flex justify-content-center">
+					<a href="/account/sell" class="btn btn-dark">Sell a Textbook</a>
+				</div>
+			</div>
+		<!-- Currently on sale -->
+				<div class="container">
+				
+					<?php
+						$sql_listings = $conn->query("SELECT * FROM listings WHERE userID = $userID");
+						
+						if ($sql_listings->num_rows > 0) {
+							echo '
+								<h2 class="h-grey">You are currently selling:</h2>
+								<table class="table">
+									<thead>
+										<tr>
+											<th class="center">Title</th>
+											<th class="center">Price</th>
+											<th class="center">Current</th>
+											<th class="center">Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+							';
+
+							while ($row = $sql_listings->fetch_assoc()) {
+								$textbookID = $row['textbookID'];
+								$listingPrice = $row['listingPrice'];
+
+								$sql_textbooks = $conn->query("SELECT * FROM textbooks LEFT JOIN listings ON textbooks.textbookID = listings.textbookID WHERE listings.textbookID = $textbookID");
+
+								while ($row = $sql_textbooks->fetch_assoc()) {
+									$textbookTitle = $row['textbookTitle'];	
+
+								}
+
+								echo "
+									<tr>
+										<td>$textbookTitle</td>
+										<td>$$listingPrice</td>
+									</tr>
+								";
+							}
+
+							echo '
+									</tbody>
+								</table>
+							';
+
+						} else {
+							// $sql_listings = $sql_listings->fetch_assoc();
+							echo '
+								<h2 class="h-grey">You aren\'t currently selling anything!</h2>
+							';
+						}
+
+						
+
+					?>
+				</div>
 
 		<!-- Footer -->
 			<?php include '../includes/footer.php'; ?>
