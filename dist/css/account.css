@@ -36,6 +36,10 @@
 	.textbook-link {
 		color: #0070BA;
 	}
+	
+	.textbook-link:hover {
+		text-decoration: underline;
+	}
 
 	.search-img {
 		max-height: 180px;
