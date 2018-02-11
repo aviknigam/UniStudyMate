@@ -32,11 +32,11 @@ if(!$result->num_rows > 0) {
 		$textbookTitle = $textbookTitle[1];
 	}
 
-	if (!preg_match("'<th>Publish Date</th> <td>(.*?)</td>'", $html1, $textbookYear)) {
+	if (!preg_match("'<th>Publish Date</th> <td>([0-9]{1,4}).*?</td>'", $html1, $textbookYear)) {
 		$textbookYear = '-';
 	} else {
-		preg_match("/[0-9]{1,4}/", $textbookYear[1], $textbookYear);
-		$textbookYear = $textbookYear[0];
+		// preg_match("/[0-9]{1,4}/", $textbookYear[1], $textbookYear);
+		$textbookYear = $textbookYear[1];
 	}
 
 	if (!preg_match_all("'<a href=\"/author/(.*?)\">'si", $html1, $textbookAuthor)) {
