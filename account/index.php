@@ -114,18 +114,22 @@
 							while ($row = $sql_listings->fetch_assoc()) {
 								$textbookID = $row['textbookID'];
 								$listingPrice = $row['listingPrice'];
+								$listingDate = date('jS M Y', strtotime($row['listingDate'])); 
 
 								$sql_textbooks = $conn->query("SELECT * FROM textbooks LEFT JOIN listings ON textbooks.textbookID = listings.textbookID WHERE listings.textbookID = $textbookID");
 
 								while ($row = $sql_textbooks->fetch_assoc()) {
 									$textbookTitle = $row['textbookTitle'];	
+									$textbookYear = $row['textbookYear'];	
 
 								}
 
 								echo "
 									<tr>
-										<td>$textbookTitle</td>
-										<td>$$listingPrice</td>
+										<td style='width: 40%;'>$textbookTitle ($textbookYear)</td>
+										<td style='width: 10%;'>$$listingPrice</td>
+										<td style='width: 20%;'>$listingDate</td>
+										<td style='width: 30%;'>Edit Renew Delete</td>
 									</tr>
 								";
 							}
