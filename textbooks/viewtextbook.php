@@ -51,7 +51,7 @@ $navbar = 'textbooks';
 		<!-- Landing -->
 			<div class="page-section">
 				<div class="container">
-					<h1 style="h-grey">Buy <?= $textbooks['textbookTitle']?></h1>
+					<h1 style="h-grey">Buy <?= $textbooks['textbookTitle']?> for $<?= $listing['listingPrice']; ?></h1>
 					<p>ISBN: <?= $textbooks['textbookISBN']?></p>
 					<p>Year: <?= $textbooks['textbookYear']?></p>
 					<p>Edition: <?= ordinal($textbooks['textbookEdition'])?></p>
