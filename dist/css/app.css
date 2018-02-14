@@ -89,6 +89,10 @@ body {
         color: #444444;
     }
 
+    .text-blue {
+        color: #0070BA;
+    }
+
     a {
         text-decoration: none;
     }
