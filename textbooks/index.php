@@ -46,56 +46,58 @@
         <!-- List of Textbooks -->
             <div class="page-section">
                 <div class="container">
-                    <table id="table" class="table table-hover">
-                        <tbody>
-                            <?php
-                                // Listings Query
-                                $listings_query = "SELECT * FROM listings WHERE listingType = 'textbook' ORDER BY listingID DESC";
-                                $listings_query = $conn->query($listings_query);
+                    <div class="table-responsive">
+                        <table id="table" class="table table-hover">
+                            <tbody>
+                                <?php
+                                    // Listings Query
+                                    $listings_query = "SELECT * FROM listings WHERE listingType = 'textbook' ORDER BY listingID DESC";
+                                    $listings_query = $conn->query($listings_query);
 
-                                while ($row = $listings_query->fetch_assoc()) {
-                                    $textbookID = $row['textbookID'];
-                                    $universityID = $row['universityID'];
-                                    $listingPrice = $row['listingPrice'];
-                                    $listingQuality = $row['listingQuality'];
-                                    $listingDescription = $row['listingDescription'];
-                                    $listingSlug = $row['listingSlug'];
-                                    
-                                    // Textbooks Query
-                                    $textbooks_query = "SELECT * FROM textbooks LEFT JOIN listings ON textbooks.textbookID = listings.textbookID WHERE listings.textbookID = $textbookID";
-                                    $textbooks_query = $conn->query($textbooks_query);
+                                    while ($row = $listings_query->fetch_assoc()) {
+                                        $textbookID = $row['textbookID'];
+                                        $universityID = $row['universityID'];
+                                        $listingPrice = $row['listingPrice'];
+                                        $listingQuality = $row['listingQuality'];
+                                        $listingDescription = $row['listingDescription'];
+                                        $listingSlug = $row['listingSlug'];
+                                        
+                                        // Textbooks Query
+                                        $textbooks_query = "SELECT * FROM textbooks LEFT JOIN listings ON textbooks.textbookID = listings.textbookID WHERE listings.textbookID = $textbookID";
+                                        $textbooks_query = $conn->query($textbooks_query);
 
-                                    while ($row = $textbooks_query->fetch_assoc()) {
-                                        $textbookISBN = $row['textbookISBN'];
-                                        $textbookTitle = $row['textbookTitle'];
-                                        $textbookYear = $row['textbookYear'];
-                                        $textbookAuthor = $row['textbookAuthor'];
-                                        $textbookEdition = $row['textbookEdition'];
-                                        $textbookPrice = $row['textbookPrice'];
-                                        $textbookURK = $row['textbookURL'];
+                                        while ($row = $textbooks_query->fetch_assoc()) {
+                                            $textbookISBN = $row['textbookISBN'];
+                                            $textbookTitle = $row['textbookTitle'];
+                                            $textbookYear = $row['textbookYear'];
+                                            $textbookAuthor = $row['textbookAuthor'];
+                                            $textbookEdition = $row['textbookEdition'];
+                                            $textbookPrice = $row['textbookPrice'];
+                                            $textbookURK = $row['textbookURL'];
+                                        }
+
+                                        // University Query
+                                        $universities_query = "SELECT * FROM universities LEFT JOIN listings ON universities.universityID = listings.universityID WHERE listings.universityID = $universityID";
+                                        $universities_query = $conn->query($universities_query);
+                                        
+                                        while ($row = $universities_query->fetch_assoc()) {
+                                            $universityName = $row['universityName'];
+                                            $universityShortName = $row['universityShortName'];
+                                        }
+                                        
+                                        // Each Table Row
+                                        echo "
+                                            <tr>
+                                                <td style='width: 40%;'><a href='/textbooks/$listingSlug' class='textbook-link'>$textbookTitle ($textbookYear)</a><br /><br /><span>$textbookAuthor</span><br /><span>Edition: " .ordinal($textbookEdition). "</span><br /><span><strong>Quality: $listingQuality/5</strong></span></td>
+                                                <td style='width: 40%;'><span><strong>$universityName</strong></span><br /><br /><span>$listingDescription</span></td>
+                                                <td width='10%'><span>ISBN: <br /><br />$textbookISBN</span></td>
+                                                <td width='10%' style='vertical-align: middle'><a href='/textbooks/$listingSlug' class='btn btn-dark btn-block'>Buy for &dollar;$listingPrice</a></td>
+                                            </tr>";
                                     }
-
-                                    // University Query
-                                    $universities_query = "SELECT * FROM universities LEFT JOIN listings ON universities.universityID = listings.universityID WHERE listings.universityID = $universityID";
-                                    $universities_query = $conn->query($universities_query);
-                                    
-                                    while ($row = $universities_query->fetch_assoc()) {
-                                        $universityName = $row['universityName'];
-                                        $universityShortName = $row['universityShortName'];
-                                    }
-                                    
-                                    // Each Table Row
-                                    echo "
-                                        <tr>
-                                            <td style='width: 40%;'><a href='/textbooks/$listingSlug' class='textbook-link'>$textbookTitle ($textbookYear)</a><br /><br /><span>$textbookAuthor</span><br /><span>Edition: " .ordinal($textbookEdition). "</span><br /><span><strong>Quality: $listingQuality/5</strong></span></td>
-                                            <td style='width: 40%;'><span><strong>$universityName</strong></span><br /><br /><span>$listingDescription</span></td>
-                                            <td width='10%'><span>ISBN: <br /><br />$textbookISBN</span></td>
-                                            <td width='10%' style='vertical-align: middle'><a href='/textbooks/$listingSlug' class='btn btn-dark btn-block'>Buy for &dollar;$listingPrice</a></td>
-                                        </tr>";
-                                }
-                            ?>
-                        </tbody>
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
