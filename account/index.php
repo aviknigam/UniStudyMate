@@ -99,21 +99,24 @@
 						if ($sql_listings->num_rows > 0) {
 							echo '
 								<h2 class="h-grey">You are currently selling:</h2>
-								<table class="table">
-									<thead>
-										<tr>
-											<th class="center">Title</th>
-											<th class="center">Price</th>
-											<th class="center">Current</th>
-											<th class="center">Actions</th>
-										</tr>
-									</thead>
-									<tbody>
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th class="center">Title</th>
+												<th class="center">Price</th>
+												<th class="center">Current</th>
+												<th class="center">Actions</th>
+											</tr>
+										</thead>
+										<tbody>
 							';
 
 							while ($row = $sql_listings->fetch_assoc()) {
+								$listingID = $row['listingID'];
 								$textbookID = $row['textbookID'];
 								$listingPrice = $row['listingPrice'];
+								$listingSlug = $row['listingSlug'];
 								$listingDate = date('jS M Y', strtotime($row['listingDate'])); 
 
 								$sql_textbooks = $conn->query("SELECT * FROM textbooks LEFT JOIN listings ON textbooks.textbookID = listings.textbookID WHERE listings.textbookID = $textbookID");
@@ -126,17 +129,22 @@
 
 								echo "
 									<tr>
-										<td style='width: 40%;'>$textbookTitle ($textbookYear)</td>
+										<td style='width: 45%;'><a href='/textbooks/$listingSlug' class='text-blue'>$textbookTitle ($textbookYear)</a></td>
 										<td style='width: 10%;'>$$listingPrice</td>
-										<td style='width: 20%;'>$listingDate</td>
-										<td style='width: 30%;'>Edit Renew Delete</td>
+										<td style='width: 15%;'>$listingDate</td>
+										<td style='width: 30%;' class='flex'>
+											<a href='renew.php?listingID=$listingID' class='btn btn-dark'>Renew</a>
+											<a href='edit.php?listingID=$listingID' class='btn btn-dark'>Edit</a>
+											<a href='delete.php?listingID=$listingID' class='btn btn-dark' onclick=\"return confirm('Are you sure?');\">Delete</a>
+										</td>
 									</tr>
 								";
 							}
 
 							echo '
-									</tbody>
-								</table>
+										</tbody>
+									</table>
+								</div>
 							';
 
 						} else {
@@ -145,11 +153,17 @@
 								<h2 class="h-grey">You aren\'t currently selling anything!</h2>
 							';
 						}
-
-						
-
 					?>
 				</div>
+
+		<!-- Account Information -->
+			<div class="page-section">
+				<div class="container">
+					<h2 class="h-grey">Contact Details:</h2>
+					<p>Update your contact details below</p>
+
+				</div>
+			</div>
 
 		<!-- Footer -->
 			<?php include '../includes/footer.php'; ?>
