@@ -7,14 +7,21 @@
 }
 
 /* Table */
+	.table-responsive {
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+	}
+
 	.table {
 		background-color: transparent;
 		border-collapse: collapse;
 		border-spacing: 2px;
 		border-color: grey;
-		display: block;
+		display: table;
 		font-size: 0.77em;
-		overflow-x: auto;
 		max-width: 100%;
 		width: 100%;
 	}
@@ -30,7 +37,7 @@
 	.table td, .table th {
 		padding: .75rem;
 		border-top: 1px solid #eceeef;
-		vertical-align: top;
+		text-align: center;
 	}
 
 	.textbook-link {
