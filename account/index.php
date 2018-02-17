@@ -51,9 +51,15 @@
 			<?php
 				if(!isset($_SESSION['userID'])) {
 					echo '
+						<div class="page-section bg-blue">
+							<div class="container landing text-d-white">
+								<h1 class="landing-heading h-white">Log in to <span class="brand">UniStudyMate:</span></h1>
+								<p>Due to the recent merge from utstextbooks.com, your same login will work!</p>
+							</div>
+						</div>
+
 						<div class="page-section">
 							<div class="container">
-								<h1 class="h-grey landing-heading">Log in to <span class="brand">UniStudyMate:</span></h1>
 								<form action="" method="POST" class="page-section login-form">
 									<input type="email" name="email" placeholder="Email address" required autofocus>
 									<input type="password" name="password" placeholder="Password" required>
@@ -75,11 +81,16 @@
 				$userID = $_SESSION['userID'];
 				$sql_users = $conn->query("SELECT * FROM users WHERE userID = $userID");
 				$sql_users = $sql_users->fetch_assoc();
+
+				$userName = $sql_users['userName'];
+				$userEmail = $sql_users['userEmail'];
+				$userPhone = $sql_users['userPhone'];
+				$userAgree = $sql_users['userAgree'];
 			?>
 		<!-- Landing -->
 			<div class="page-section bg-blue">
 				<div class="container landing text-d-white">
-					<h1 class="h-white landing-heading">Welcome <?= $sql_users['userName'];?>!</h1>
+					<h1 class="h-white landing-heading">Welcome <?= $userName ?>!</h1>
 					<p>Feel free to list your textbooks on sale.</p>
 				</div>
 			</div>
@@ -161,8 +172,38 @@
 				<div class="container">
 					<h2 class="h-grey">Contact Details:</h2>
 					<p>Update your contact details below</p>
-
 				</div>
+			</div>
+
+			<div class="container">
+				<form action="edit-account" class="login-form" method="POST">
+					<div class="form-row">
+						<label for="userName">First Name:</label>
+						<input type="text" id="userName" name="userName" value="<?= $userName ?>"  required>
+					</div>
+					<div class="form-row">
+						<label for="userEmail">Email:</label>
+						<input type="email" id="userEmail" name="userEmail" value="<?= $userEmail ?>" required>
+					</div>
+					<div class="form-row">
+						<label for="userPhone">Mobile:</label>
+						<input type="tel" id="userPhone" name="userPhone" value="<?= $userPhone ?>" required>
+					</div>
+					<div class="form-row">
+						<label for="universityID">University:</label>
+						<select id="universityID" name="universityID">
+							<?php
+								$sql_universities = $conn->prepare("SELECT * FROM universities")
+							?>
+						</select>
+					</div>
+					<div class="form-row">
+						<label for=""></label>
+						<input type="number" id="" name="" value="<?= $sql_users['userAgree']; ?>">
+					</div>
+					<input type="password" placeholder="New Password">
+					<input type="password" placeholder="Retype New Password">
+				</form>
 			</div>
 
 		<!-- Footer -->
