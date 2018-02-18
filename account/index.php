@@ -176,38 +176,55 @@
 			</div>
 
 			<div class="container">
-				<form action="edit-account" class="login-form" method="POST">
+				<form action="edit-account" class="details-form" method="POST">
 					<div class="form-row">
-						<label for="userName">First Name:</label>
+						<label for="userName">First Name: <span class="required">*</span></label>
 						<input type="text" id="userName" name="userName" value="<?= $userName ?>"  required>
 					</div>
 					<div class="form-row">
-						<label for="userEmail">Email:</label>
+						<label for="userEmail">Email: <span class="required">*</span></label>
 						<input type="email" id="userEmail" name="userEmail" value="<?= $userEmail ?>" required>
 					</div>
 					<div class="form-row">
 						<label for="userPhone">Mobile:</label>
-						<input type="tel" id="userPhone" name="userPhone" value="<?= $userPhone ?>" required>
+						<input type="tel" id="userPhone" name="userPhone" value="<?= $userPhone ?>">
 					</div>
 					<div class="form-row">
-						<label for="universityID">University:</label>
+						<label for="userAgree">Allow buyer to see my number:</label><br/>
+						<label for="userAgree">Yes</label>
+						<input type="radio" id="userAgree" name="userAgree" value="1" <?php if ($userAgree == 1) { echo 'checked';} ?>>
+						<label for="userAgree">No</label>
+						<input type="radio" id="userAgree" name="userAgree" value="0" <?php if ($userAgree == 0) { echo 'checked';} ?>>
+					</div>
+					<div class="form-row">
+						<label for="universityID">University:</label><br/>
 						<select id="universityID" name="universityID">
 							<?php
-								$sql_universities = $conn->prepare("SELECT * FROM universities")
+								$currentUniversity = $sql_users['universityID'];
+								$sql_universities = $conn->query("SELECT * FROM universities ORDER BY universityCountry ASC, universityName ASC");
+
+								while ($row = $sql_universities->fetch_assoc()) {
+									$universityID = $row['universityID'];
+									$universityName = $row['universityName'];
+									$universityShortCountry = $row['universityShortCountry'];
+
+									echo "
+										<option value='$universityID' "; if ($currentUniversity == $universityID) { echo 'selected'; } echo ">$universityShortCountry - $universityName</option>
+									";
+								}
 							?>
 						</select>
 					</div>
+
 					<div class="form-row">
-						<label for=""></label>
-						<input type="number" id="" name="" value="<?= $sql_users['userAgree']; ?>">
+						<label for="userPassword">Change Password - (optional)</label>
+						<input type="password" placeholder="New Password">
 					</div>
-					<input type="password" placeholder="New Password">
-					<input type="password" placeholder="Retype New Password">
+					<button class="btn btn-dark btn-block" style="margin-bottom: 50px;">Update</button>
 				</form>
 			</div>
 
 		<!-- Footer -->
 			<?php include '../includes/footer.php'; ?>
-			
 	</body>
 </html>
