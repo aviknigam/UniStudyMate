@@ -58,11 +58,16 @@
 		margin: auto;
 	}
 
+	.details-form {
+		max-width: 330px;
+		margin: auto;
+	}
+
 	.form-row {
 		margin-bottom: 20px;
 	}
 	
-	.login-form input {
+	.login-form input, .details-form input, select, option {
 		background-clip: padding-box;
 		border: 1px solid #ced4da;
 		border-radius: .25rem;
@@ -75,4 +80,10 @@
 
 	.btn-block {
 		width: 100%;
+	}
+
+/* Form specific inputs */
+	#userAgree {
+		display: inline;
+		width: auto;
 	}
