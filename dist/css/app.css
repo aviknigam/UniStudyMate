@@ -101,6 +101,10 @@ body {
         font-family: "Lobster", cursive;
     }
 
+    .required {
+        color: #ff0000;
+    }
+
 /* Navbar */
     .navbar {
         background-color: #FFFFFF;
