@@ -18,17 +18,16 @@ $result = $sql->get_result();
 
 // If we cannot find the post in the database
 if(!$result->num_rows > 0) {
-	
-	if (!file_exists('https://isbndb.com/book/' . $_GET['url'])) {
+	$html1 = @file_get_contents('https://isbndb.com/book/' . $_GET['url']);
+	// URL is for backup
+	// $html2 = file_get_contents('https://studentvip.com.au/textbooks/' . $_GET['url']);
+
+	// URL doesn't allow file_get_contents
+	// $html3 = file_get_contents('http://isbnsearch.org/isbn/' . $_GET['url']);
+
+	if ($html1 === false AND empty($html1)) {
 		echo '<p>Book not found, please <a href="/contact" class="text-blue">contact us</a> to have it added manually.</p>';
 	} else {
-		$html1 = file_get_contents('https://isbndb.com/book/' . $_GET['url']);
-		
-		// URL is for backup
-		// $html2 = file_get_contents('https://studentvip.com.au/textbooks/' . $_GET['url']);
-
-		// URL doesn't allow file_get_contents
-		// $html3 = file_get_contents('http://isbnsearch.org/isbn/' . $_GET['url']);
 
 		if (!preg_match("'<th>Full Title</th> <td>(.*?)</td>'si", $html1, $textbookTitle)) {
 			$textbookTitle = '-';
