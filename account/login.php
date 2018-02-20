@@ -45,40 +45,38 @@
 	<head>
 		<?php include '../includes/head.php'; ?>
 		<link rel="stylesheet" type="text/css" href="/dist/css/account.css?<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="/dist/css/responsive.css?<?php echo time(); ?>">
 	</head>
 
 	<body>
 		<!-- Navbar -->
 			<?php include '../includes/navbar.php'; ?>
 
-		<!-- If not logged in, display login form -->
-            <?php
-				if(!isset($_SESSION['userID'])) {
-					echo '
-						<div class="page-section bg-blue">
-							<div class="container landing text-d-white">
-								<h1 class="landing-heading h-white">Log in to <span class="brand">UniStudyMate:</span></h1>
-								<p>Due to the recent merge from utstextbooks.com, your same login will work!</p>
-							</div>
-						</div>
+		<!-- Landing -->
+			<div class="page-section bg-blue">
+				<div class="container landing text-d-white">
+					<h1 class="landing-heading h-white">Log in to <span class="brand">UniStudyMate:</span></h1>
+					<p>Due to the recent merge from utstextbooks.com, your same login will work!</p>
+				</div>
+			</div>
 
-						<div class="page-section">
-							<div class="container">
-								<form action="" method="POST" class="page-section login-form">
-									<input type="email" name="email" placeholder="Email address" required autofocus>
-									<input type="password" name="password" placeholder="Password" required>
-									<button class="btn btn-dark btn-block" name="submit">Login</button>
-								</form>
-								<div class="flex ffcolwrap align-items-center text-grey">
-									<p><a href="/account/recover">Forgot password?</a></p>
-									<a href="/account/register"><button class="btn btn-light">Sign up for free</button></a>
-								</div>
-							</div>
-						</div>
-					';
-					include '../includes/footer.php';
-					die();
-				}
-            ?>
-    </body>
+		<!-- Login Form -->
+			<div class="page-section">
+				<div class="container">
+					<form action="" method="POST" class="page-section login-form">
+						<input type="email" name="email" placeholder="Email address" required autofocus>
+						<input type="password" name="password" placeholder="Password" required>
+						<button class="btn btn-dark btn-block" name="submit">Login</button>
+					</form>
+					<div class="flex ffcolwrap align-items-center text-grey">
+						<p><a href="/account/recover">Forgot password?</a></p>
+						<a href="/account/register"><button class="btn btn-light">Sign up for free</button></a>
+					</div>
+				</div>
+			</div>
+
+		<!-- Footer -->
+			<?php include '../includes/footer.php'; ?>
+
+	</body>
 </html>
