@@ -1,38 +1,37 @@
 <?php
 	require __DIR__ . '/../core/init.php';
-	$title = 'View Account';
+	$title = 'Account';
 	$description = 'List your textbooks and notes for sale, add subject reviews and advertise yourself as a University tutor!';
 	$navbar = 'account';
 
-	if(isset($_POST['submit'])) {
-		$userEmail = sanitize($_POST['email']);
-		$userPassword = sanitize($_POST['password']);
-		
-		$sql = $conn->prepare("SELECT * FROM users WHERE userEmail = ?");
-		$sql->bind_param("s", $userEmail);
-		$sql->execute();
+	if (!isset($_SESSION['userID'])) {
+		header('Location: ./login');
+		die();
+	} else {
+		$userID = $_SESSION['userID'];
+	}
 
-		$row_find_hash = ($sql->get_result())->fetch_assoc();
-		$hash_password = $row_find_hash['userPassword'];
-		$hash = password_verify($userPassword, $hash_password);
+	if (isset($_POST['submit'])) {
+		$userName = sanitize($_POST['userName']);
+		$userEmail = sanitize($_POST['userEmail']);
+		$userPhone = sanitize($_POST['userPhone']);
+		$universityID = sanitize($_POST['universityID']);
+		$userAgree = sanitize($_POST['userAgree']);
 
-		// Check row association 
-		$stmt_sql_login_user = $conn->prepare("SELECT * FROM users WHERE userEmail = ? AND userPassword = ?");
-		$stmt_sql_login_user->bind_param("ss", $userEmail, $hash_password);
-		$stmt_sql_login_user->execute();
+		$sql_users = $conn->prepare("UPDATE users SET userName = ?, userEmail = ?, userPhone = ?, universityID = ?, userAgree = ? WHERE userID = $userID");
+		$sql_users->bind_param("sssss", $userName, $userEmail, $userPhone, $universityID, $userAgree);
+		$sql_users->execute();
 
+		if (!empty($_POST['userPassword'])) {
+			$userPassword = sanitize($_POST['userPassword']);
+			$encrypted_password = password_hash($userPassword, PASSWORD_DEFAULT);
 
-		// Run Check IF statement
-		if ($hash == 0) {
-			echo 'Incorrect email or password, please <a href="/account/" style="color: blue;">try logging in again.</a> If you are not a member yet then you can <a href="/account/register" style="color: blue;">Sign up for free!</a>';
-
-		} elseif (!$row_login_user = ($stmt_sql_login_user->get_result())->fetch_assoc()) {
-			echo 'Incorrect email or password, please <a href="/account/" style="color: blue;">try logging in again.</a> If you are not a member yet then you can <a href="/account/register" style="color: blue;">Sign up for free!</a>';
-
-		} else { 
-			$_SESSION['userID'] = $row_login_user['userID'];
-			header("Location: ./");
+			$sql_users = $conn->prepare("UPDATE users SET userPassword = ? WHERE userID = $userID");
+			$sql_users->bind_param("s", $encrypted_password);
+			$sql_users->execute();
 		}
+
+		header('Location: ./');
 	}
 ?>
 
@@ -41,44 +40,15 @@
 	<head>
 		<?php include '../includes/head.php'; ?>
 		<link rel="stylesheet" type="text/css" href="/dist/css/account.css?<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="/dist/css/responsive.css?<?php echo time(); ?>">
 	</head>
 
 	<body>
 		<!-- Navbar -->
 			<?php include '../includes/navbar.php'; ?>
 
-		<!-- If not logged in, display login form -->
-			<?php
-				if(!isset($_SESSION['userID'])) {
-					echo '
-						<div class="page-section bg-blue">
-							<div class="container landing text-d-white">
-								<h1 class="landing-heading h-white">Log in to <span class="brand">UniStudyMate:</span></h1>
-								<p>Due to the recent merge from utstextbooks.com, your same login will work!</p>
-							</div>
-						</div>
-
-						<div class="page-section">
-							<div class="container">
-								<form action="" method="POST" class="page-section login-form">
-									<input type="email" name="email" placeholder="Email address" required autofocus>
-									<input type="password" name="password" placeholder="Password" required>
-									<button class="btn btn-dark btn-block" name="submit">Login</button>
-								</form>
-								<div class="flex ffcolwrap align-items-center text-grey">
-									<p><a href="/account/recover">Forgot password?</a></p>
-									<a href="/account/register"><button class="btn btn-light">Sign up for free</button></a>
-								</div>
-							</div>
-						</div>
-					';
-					include '../includes/footer.php';
-					die();
-				}
-			?>
 		<!-- Once logged in -->
 			<?php
-				$userID = $_SESSION['userID'];
 				$sql_users = $conn->query("SELECT * FROM users WHERE userID = $userID");
 				$sql_users = $sql_users->fetch_assoc();
 
@@ -114,10 +84,10 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th class="center">Title</th>
-												<th class="center">Price</th>
-												<th class="center">Current</th>
-												<th class="center">Actions</th>
+												<th class="text-align-center">Title</th>
+												<th class="text-align-center">Price</th>
+												<th class="text-align-center">Current</th>
+												<th class="text-align-center">Actions</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -140,10 +110,10 @@
 
 								echo "
 									<tr>
-										<td style='width: 45%;'><a href='/textbooks/$listingSlug' class='text-blue'>$textbookTitle ($textbookYear)</a></td>
-										<td style='width: 10%;'>$$listingPrice</td>
-										<td style='width: 15%;'>$listingDate</td>
-										<td style='width: 30%;' class='flex'>
+										<td class='text-align-center' style='width: 45%;'><a href='/textbooks/$listingSlug' class='text-blue'>$textbookTitle ($textbookYear)</a></td>
+										<td class='text-align-center' style='width: 10%;'>$$listingPrice</td>
+										<td class='text-align-center' style='width: 15%;'>$listingDate</td>
+										<td class='text-align-center' style='width: 30%;' class='flex'>
 											<a href='renew.php?listingID=$listingID' class='btn btn-dark'>Renew</a>
 											<a href='edit.php?listingID=$listingID' class='btn btn-dark'>Edit</a>
 											<a href='delete.php?listingID=$listingID' class='btn btn-dark' onclick=\"return confirm('Are you sure?');\">Delete</a>
@@ -176,7 +146,7 @@
 			</div>
 
 			<div class="container">
-				<form action="edit-account" class="details-form" method="POST">
+				<form action="" class="details-form" method="POST">
 					<div class="form-row">
 						<label for="userName">First Name: <span class="required">*</span></label>
 						<input type="text" id="userName" name="userName" value="<?= $userName ?>"  required>
@@ -192,9 +162,9 @@
 					<div class="form-row">
 						<label for="userAgree">Allow buyer to see my number:</label><br/>
 						<label for="userAgree">Yes</label>
-						<input type="radio" id="userAgree" name="userAgree" value="1" <?php if ($userAgree == 1) { echo 'checked';} ?>>
+						<input type="radio" class="userAgree" name="userAgree" value="1" <?php if ($userAgree == 1) { echo 'checked';} ?>>
 						<label for="userAgree">No</label>
-						<input type="radio" id="userAgree" name="userAgree" value="0" <?php if ($userAgree == 0) { echo 'checked';} ?>>
+						<input type="radio" class="userAgree" name="userAgree" value="0" <?php if ($userAgree == 0) { echo 'checked';} ?>>
 					</div>
 					<div class="form-row">
 						<label for="universityID">University:</label><br/>
@@ -218,9 +188,9 @@
 
 					<div class="form-row">
 						<label for="userPassword">Change Password - (optional)</label>
-						<input type="password" placeholder="New Password">
+						<input type="password" name="userPassword" placeholder="New Password">
 					</div>
-					<button class="btn btn-dark btn-block" style="margin-bottom: 50px;">Update</button>
+					<button name="submit" class="btn btn-dark btn-block" style="margin-bottom: 50px;">Update</button>
 				</form>
 			</div>
 
