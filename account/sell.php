@@ -10,6 +10,7 @@
 	<head>
 		<?php include '../includes/head.php'; ?>
 		<link rel="stylesheet" type="text/css" href="/dist/css/account.css?<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="/dist/css/responsive.css?<?php echo time(); ?>">
 	</head>
 
 	<body>
