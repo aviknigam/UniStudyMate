@@ -26,7 +26,7 @@ if(!$result->num_rows > 0) {
 	// $html3 = file_get_contents('http://isbnsearch.org/isbn/' . $_GET['url']);
 
 	if ($html1 === false AND empty($html1)) {
-		echo '<p>Book not found, please <a href="/contact" class="text-blue">contact us</a> to have it added manually.</p>';
+		echo '<p>Book not found, it will be added manually within 24 hours and you will be notified by email. You could also <a href="/contact" class="text-blue">contact us</a></p>';
 	} else {
 
 		if (!preg_match("'<th>Full Title</th> <td>(.*?)</td>'si", $html1, $textbookTitle)) {
@@ -67,19 +67,45 @@ if(!$result->num_rows > 0) {
 			$sql->execute();
 		}
 
-
 		echo "
 			<div class='flex justify-content-center'>
 				<img src='$textbookURL' class='search-img' alt='A picture for $textbookTitle is not available at the moment'>
-				<table class='table'>
-					<tbody>
-						<tr><td><strong>Title</strong></td> <td>$textbookTitle</td>
-						<tr><td><strong>Year</strong></td> <td>$textbookYear</td>
-						<tr><td><strong>Authors</td></strong> <td>$textbookAuthor</td>
-						<tr><td><strong>Edition</strong></td> <td>" .ordinal($textbookEdition). "</td>
-					</tbody>
-				</table>
-			</div>";
+				<form action='' method='POST'>
+					<table class='table'>
+						<tbody>
+							<tr><td><strong>Title</strong></td> <td>$textbookTitle</td></tr>
+							<tr><td><strong>Year</strong></td> <td>$textbookYear</td></tr>
+							<tr><td><strong>Authors</td></strong> <td>$textbookAuthor</td></tr>
+							<tr><td><strong>Edition</strong></td> <td>" .ordinal($textbookEdition). "</td></tr>
+							<tr><td><strong>Description:</strong></td> <td><input type='text' id='listingDescription' name='listingDescription' class='sell-input'></td></tr>
+							<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
+							<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' id='subjectName' name='subjectName' class='sell-input'></td></tr> -->
+							<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' id='listingPrice' name='listingPrice' class='sell-input'></td></tr>
+						</tbody>
+					</table>
+					<input type='hidden' name='textbookISBN' value='$textbookISBN'>
+					<button name='sell' class='btn btn-dark flex auto'>Sell</button>
+				</form>
+			</div>
+		";
+	}
+
+	// Insert the textbookISBN into `issues` for follow up if it is UNIQUE.
+	$sql_issues = $conn->prepare("SELECT textbookISBN FROM issues WHERE textbookISBN = ?");
+	$sql_issues->bind_param("s", $textbookISBN);
+	$sql_issues->execute();
+
+	if (!($sql_issues->get_result())->num_rows > 0) {
+		$userID = $_SESSION['userID'];
+		$issueType = 'textbook';
+
+		// Date and Time
+		date_default_timezone_set('Australia/Sydney');
+		$date = date("Y-m-d H:i:s");
+
+		$sql_issues = $conn->prepare("INSERT INTO `issues` (userID, issueType, textbookISBN, issueDate) VALUES (?, ?, ?, ?)");
+		$sql_issues->bind_param("ssss", $userID, $issueType, $textbookISBN, $date);
+		$sql_issues->execute();
 	}
 
 } else {
@@ -87,19 +113,25 @@ if(!$result->num_rows > 0) {
 	$row = $result->fetch_assoc();
 
 	echo "
-		<div class='flex justify-content-center'>
-			<img src='$row[textbookURL]' class='search-img' alt='A picture for $row[textbookTitle] is not available at the moment'>
-			<table class='table'>
-				<tbody>
-					<tr><td><strong>Title</strong></td> <td>$row[textbookTitle]</td>
-					<tr><td><strong>Year</strong></td> <td>$row[textbookYear]</td>
-					<tr><td><strong>Authors</td></strong> <td>$row[textbookAuthor]</td>
-					<tr><td><strong>Edition</strong></td> <td>" .ordinal($row['textbookEdition']). "</td>
-				</tbody>
-			</table>
+		<div class='flex justify-content-center align-items-center'>
+			<img src='$row[textbookURL]' class='search-img' alt='A picture for the book $row[textbookTitle] is available.'>
+			<form action='' method='POST'>
+				<table class='table'>
+					<tbody>
+						<tr><td><strong>Title</strong></td> <td>$row[textbookTitle]</td></tr>
+						<tr><td><strong>Year</strong></td> <td>$row[textbookYear]</td></tr>
+						<tr><td><strong>Authors</td></strong> <td>$row[textbookAuthor]</td></tr>
+						<tr><td><strong>Edition</strong></td> <td>" .ordinal($row['textbookEdition']). "</td></tr>
+						<tr><td><strong>Description:</strong></td> <td><input type='text' id='listingDescription' name='listingDescription' class='sell-input'></td></tr>
+						<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
+						<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' id='subjectName' name='subjectName' class='sell-input'></td></tr> -->
+						<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' id='listingPrice' name='listingPrice' class='sell-input'></td></tr>
+					</tbody>
+				</table>
+				<input type='hidden' name='textbookISBN' value='$textbookISBN'>
+				<button name='sell' class='btn btn-dark flex auto'>Sell</button>
+			</form>
 		</div>
 	";
 }
-
-
 ?>
