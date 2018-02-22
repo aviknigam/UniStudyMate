@@ -37,7 +37,6 @@
 	.table td, .table th {
 		padding: .75rem;
 		border-top: 1px solid #eceeef;
-		text-align: center;
 	}
 
 	.textbook-link {
@@ -50,6 +49,7 @@
 
 	.search-img {
 		max-height: 180px;
+		margin-right: 20px;
 	}
 
 /* Forms */
@@ -67,7 +67,7 @@
 		margin-bottom: 20px;
 	}
 	
-	.login-form input, .details-form input, select, option {
+	.login-form input, .details-form input, .sell-input, select, option {
 		background-clip: padding-box;
 		border: 1px solid #ced4da;
 		border-radius: .25rem;
@@ -83,7 +83,7 @@
 	}
 
 /* Form specific inputs */
-	#userAgree {
+	.userAgree {
 		display: inline;
 		width: auto;
 	}
