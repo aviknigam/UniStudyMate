@@ -41,4 +41,3 @@
         <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="/dist/css/app.css?<?php echo time(); ?>">
-        <link rel="stylesheet" type="text/css" href="/dist/css/responsive.css?<?php echo time(); ?>">
