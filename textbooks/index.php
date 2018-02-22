@@ -10,6 +10,7 @@
     <head>
         <?php include '../includes/head.php'; ?>
         <link rel="stylesheet" type="text/css" href="/dist/css/textbooks.css?<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="/dist/css/responsive.css?<?php echo time(); ?>">
     </head>
 
     <body>
@@ -33,7 +34,7 @@
                 <div class="container flex ffcolwrap align-items-center text-align-center">
                     <?php
                         if (!isset($_SESSION['userID'])) {
-                            echo '<a href="/account/register" class="btn btn-dark btn-block">Create an Account</a>';
+                            echo '<a href="/account/register" class="btn btn-dark btn-block">Sell a Textbook</a>';
                         } else {
                             echo '<a href="/account/sell" class="btn btn-dark btn-block">Sell a Textbook</a>';
                         }
@@ -56,7 +57,7 @@
 
                                     while ($row = $listings_query->fetch_assoc()) {
                                         $textbookID = $row['textbookID'];
-                                        $universityID = $row['universityID'];
+                                        $userID = $row['userID'];
                                         $listingPrice = $row['listingPrice'];
                                         $listingQuality = $row['listingQuality'];
                                         $listingDescription = $row['listingDescription'];
@@ -76,8 +77,16 @@
                                             $textbookURK = $row['textbookURL'];
                                         }
 
+                                        // Users Query
+                                        $users_query = "SELECT * FROM users LEFT JOIN listings ON users.userID = listings.userID WHERE listings.userID = $userID";
+                                        $users_query = $conn->query($users_query);
+
+                                        while ($row = $users_query->fetch_assoc()) {
+                                            $universityID = $row['universityID'];
+                                        }
+                                        
                                         // University Query
-                                        $universities_query = "SELECT * FROM universities LEFT JOIN listings ON universities.universityID = listings.universityID WHERE listings.universityID = $universityID";
+                                        $universities_query = "SELECT * FROM universities LEFT JOIN users ON universities.universityID = users.universityID WHERE users.universityID = $universityID";
                                         $universities_query = $conn->query($universities_query);
                                         
                                         while ($row = $universities_query->fetch_assoc()) {
