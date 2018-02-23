@@ -25,5 +25,10 @@
 			align-items: center;
 			padding: 0;
 		}
+	
+	/* Account */
+		.details-form {
+			max-width: 500px;
+		}
 
 }
