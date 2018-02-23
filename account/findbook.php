@@ -78,7 +78,7 @@ if(!$result->num_rows > 0) {
 							<tr><td><strong>Authors</td></strong> <td>$textbookAuthor</td></tr>
 							<tr><td><strong>Edition</strong></td> <td>" .ordinal($textbookEdition). "</td></tr>
 							<tr><td><strong>Description:</strong></td> <td><input type='text' id='listingDescription' name='listingDescription' class='sell-input'></td></tr>
-							<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
+							<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Good / Contains Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
 							<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' id='subjectName' name='subjectName' class='sell-input'></td></tr> -->
 							<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' id='listingPrice' name='listingPrice' class='sell-input'></td></tr>
 						</tbody>
@@ -123,7 +123,7 @@ if(!$result->num_rows > 0) {
 						<tr><td><strong>Authors</td></strong> <td>$row[textbookAuthor]</td></tr>
 						<tr><td><strong>Edition</strong></td> <td>" .ordinal($row['textbookEdition']). "</td></tr>
 						<tr><td><strong>Description:</strong></td> <td><input type='text' id='listingDescription' name='listingDescription' class='sell-input'></td></tr>
-						<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
+						<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Good / Contains Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
 						<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' id='subjectName' name='subjectName' class='sell-input'></td></tr> -->
 						<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' id='listingPrice' name='listingPrice' class='sell-input'></td></tr>
 					</tbody>
