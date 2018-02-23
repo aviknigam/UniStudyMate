@@ -12,6 +12,8 @@
 		$userEmail = sanitize($_POST['email']);
 		$userPassword = sanitize($_POST['password']);
 		
+        require __DIR__ . '/../core/functions/recaptchacheck.php';
+
 		$sql = $conn->prepare("SELECT * FROM users WHERE userEmail = ?");
 		$sql->bind_param("s", $userEmail);
 		$sql->execute();
@@ -64,13 +66,22 @@
 			<div class="page-section">
 				<div class="container">
 					<form action="" method="POST" class="page-section login-form">
-						<input type="email" name="email" placeholder="Email address" required autofocus>
-						<input type="password" name="password" placeholder="Password" required>
+						<div class="form-row">
+							<label for="email">Email: <span class="text-red">*</span></label>
+							<input type="email" name="email" required autofocus>
+						</div>
+						<div class="form-row">
+							<label for="password">Password: <span class="text-red">*</span></label>
+							<input type="password" name="password" required>
+						</div>
+						<div class="form-row flex justify-content-center">
+							<?php require __DIR__ . '/../includes/recaptcha.php'; ?>
+						</div>
 						<button class="btn btn-dark btn-block" name="submit">Login</button>
 					</form>
 					<div class="flex ffcolwrap align-items-center text-grey">
 						<p><a href="/account/recover">Forgot password?</a></p>
-						<a href="/account/register"><button class="btn btn-light">Sign up for free</button></a>
+						<a href="/account/register"><button class="btn btn-dark">Sign up for free</button></a>
 					</div>
 				</div>
 			</div>
