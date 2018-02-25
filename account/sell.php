@@ -3,6 +3,44 @@
 	$title = 'Sell a Textbook';
 	$description = 'Sell a textbook for a competitive price!';
 	$navbar = 'account';
+
+	if (!isset($_SESSION['userID'])) {
+		header('Location: ./login');
+		die();
+	} else {
+		$userID = $_SESSION['userID'];
+	}
+
+	if (isset($_POST['sell'])) {
+		// Gather POST data
+		$listingDescription = sanitize($_POST['listingDescription']);
+		$listingQuality = sanitize($_POST['listingQuality']);
+		$listingPrice = sanitize($_POST['listingPrice']);
+		$textbookISBN = sanitize($_POST['textbookISBN']);
+
+		// Fetch textbookID
+		$sql_textbooks = $conn->query("SELECT * FROM textbooks WHERE textbookISBN = $textbookISBN");
+		$sql_textbooks= $sql_textbooks->fetch_assoc();
+
+		$textbookID = $sql_textbooks['textbookID'];
+		$textbookTitle = clean($sql_textbooks['textbookTitle']);
+		$listingType = 'textbook';
+
+		// Date for the slug
+		date_default_timezone_set('Australia/Sydney');
+		$dateSlug = date("Ymd");
+        $listingDate = date("Y-m-d H:i:s");
+
+		// Slug
+		$listingSlug = "$textbookTitle-$dateSlug-$userID-$textbookID";
+
+		// Enter into the database
+		$sql_listings = $conn->prepare("INSERT INTO listings (userID, textbookID, listingType, listingPrice, listingQuality, listingDescription, listingDate, listingSlug) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+		$sql_listings->bind_param("ssssssss", $userID, $textbookID, $listingType, $listingPrice, $listingQuality, $listingDescription, $listingDate, $listingSlug);
+		$sql_listings->execute();
+
+		header('Location: ./');
+	}
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +67,7 @@
 				<div class="container flex ffcolwrap align-items-center">
                     <form id="textbookSearch">
                         <label for="textbookISBN">Enter 13 digit textbook ISBN (no dashes): </label>
-                        <input type="text" name="textbookISBN" id="textbookISBN">
+                        <input type="text" name="textbookISBN" id="textbookISBN" required>
                         <button class="btn btn-dark">Search</button>
 					</form>
 					<div id="loader" class="hide">
