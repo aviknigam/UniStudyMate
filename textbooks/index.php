@@ -107,6 +107,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <?php include '../includes/ads-responsive.php'; ?>
                 </div>
             </div>
 

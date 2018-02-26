@@ -152,6 +152,7 @@
 							";
 						?>
 					</div>
+                    <?php include '../includes/ads-responsive.php'; ?>
 				</div>
 			</div>
 		
@@ -190,7 +191,7 @@
 						</div>
 						<button name="submit" class="btn btn-dark flex auto">Submit</button>
 					</form>
-
+                    <?php include '../includes/ads-responsive.php'; ?>
 				</div>
 			</div>
 		
