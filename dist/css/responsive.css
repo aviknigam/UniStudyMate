@@ -4,6 +4,18 @@
 	.container {
 		width: 750px;
 	}
+
+	.viewtextbook {
+		flex-flow: row nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.viewtextbook img {
+		max-height: 250px;
+		margin: 0 20px 0 0;
+		width: auto;
+	}
 }
 	
 @media (min-width: 992px) {

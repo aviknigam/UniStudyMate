@@ -48,8 +48,34 @@
 		text-decoration: underline;
 	}
 
-	.textbook-img {
-		display: block;
+/* View Textbook */
+	.viewtextbook {
+		display: flex;
+		flex-flow: column nowrap;
+	}
+
+	.viewtextbook img {
+		margin: auto auto 20px auto;
+		width: 50%;
+	}
+
+/* Contact Form */
+	.details-form {
+		max-width: 330px;
 		margin: auto;
+	}
+
+	.form-row {
+		margin-bottom: 20px;
+	}
+
+	.details-form input, select, option, textarea {
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: .25rem;
+		box-sizing: border-box;
+		display: block;
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		padding: 10px;
 		width: 100%;
 	}
