@@ -60,7 +60,7 @@
 		<!-- Landing -->
 			<div class="page-section bg-blue">
 				<div class="container landing text-d-white">
-					<h1 class="h-white landing-heading">Welcome <?= $userName ?>!</h1>
+					<h1 class="landing-heading h-white">Welcome <?= $userName ?>!</h1>
 					<p>Feel free to list your textbooks on sale.</p>
 				</div>
 			</div>

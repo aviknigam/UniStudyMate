@@ -58,7 +58,7 @@
 		<!-- Landing -->
 			<div class="page-section bg-blue">
 				<div class="container landing">
-					<h1 class="h-white landing-heading">Sell a Textbook</h1>
+					<h1 class="landing-heading h-white">Sell a Textbook</h1>
 				</div>
 			</div>			
 
