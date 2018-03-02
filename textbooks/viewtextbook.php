@@ -83,7 +83,8 @@
 		require __DIR__ . '/../core/functions/recaptchacheck.php';
 		
 		// Compose Email
-		$to = $buyerEmail; 
+		$to = $userEmail;
+		$from = $buyerEmail;
 		$subject = "$textbookTitle Textbook for $$listingPrice on unistudymate.com";
 		$message = "
 		<html>
