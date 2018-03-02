@@ -80,7 +80,7 @@
 						<button class="btn btn-dark btn-block" name="submit">Login</button>
 					</form>
 					<div class="flex ffcolwrap align-items-center text-grey">
-						<p><a href="/account/recover">Forgot password?</a></p>
+						<p><a href="/account/recover" class="text-blue">Forgot password?</a></p>
 						<a href="/account/register"><button class="btn btn-dark">Sign up for free</button></a>
 					</div>
 				</div>

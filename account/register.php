@@ -111,6 +111,7 @@
                         <div class="form-row">
                             <label for="universityID">University: <span class="text-red">*</span></label><br/>
                             <select id="universityID" name="universityID">
+                                <option>-- Select a University --</option>
                                 <?php
                                     $sql_universities = $conn->query("SELECT * FROM universities ORDER BY universityCountry ASC, universityName ASC");
 
