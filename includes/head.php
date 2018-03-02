@@ -15,7 +15,7 @@
         <link rel="shortcut icon" href="/dist/img/favicon/favicon.ico?v=kPg5dmjPmB">
         <meta name="theme-color" content="#ffffff">
 
-        <!-- Google Analytics -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
         <?php
             if ($googleAnalytics == 1) {
                 include 'head.analytics.php';
@@ -25,15 +25,15 @@
         <!-- Facebook -->
         <meta property="og:title" content="<?= 'UniStudyMate | ' .$title ?>">
         <meta property="og:type" content="website">
-        <meta property="og:url" content="<?= $configurl ?>">
+        <meta property="og:url" content="<?= $configURL ?>">
         <meta property="og:description" content="<?= $description ?>">
-        <meta property="og:image" content="<?= $configurl ?>/dist/img/og.jpg">
+        <meta property="og:image" content="<?= $configURL ?>/dist/img/cover.jpg">
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="<?= 'UniStudyMate | ' .$title ?>" />
         <meta name="twitter:description" content="<?= $description ?>" />
-        <meta name="twitter:image:src" content="<?= $configurl ?>/dist/img/favicon/android-chrome-256x256.jpg" />
+        <meta name="twitter:image:src" content="<?= $configURL ?>/dist/img/favicon/android-chrome-256x256.jpg" />
 
         <!-- Normalize CSS -->
         <link rel="stylesheet" href="https://necolas.github.io/normalize.css/7.0.0/normalize.css">
