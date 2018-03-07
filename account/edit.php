@@ -48,7 +48,7 @@
 		<!-- Landing -->
 			<div class="page-section bg-blue">
 				<div class="container landing">
-					<h1 class="h-white landing-heading">Update Listing</h1>
+					<h1 class="landing-heading h-white">Update Listing</h1>
 				</div>
 			</div>			
 

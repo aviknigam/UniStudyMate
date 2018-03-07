@@ -16,6 +16,15 @@
 		margin: 0 20px 0 0;
 		width: auto;
 	}
+
+	.footer-vultr {
+		width: 200px;
+	}
+
+	.footer-social {
+		width: 100px;
+	}
+
 }
 	
 @media (min-width: 992px) {
