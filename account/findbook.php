@@ -68,7 +68,7 @@ if(!$result->num_rows > 0) {
 		}
 
 		echo "
-			<div class='flex justify-content-center'>
+			<div class='d-flex justify-content-center'>
 				<img src='$textbookURL' class='search-img' alt='A picture for $textbookTitle is not available at the moment'>
 				<form action='' method='POST'>
 					<table class='table'>
@@ -77,14 +77,14 @@ if(!$result->num_rows > 0) {
 							<tr><td><strong>Year</strong></td> <td>$textbookYear</td></tr>
 							<tr><td><strong>Authors</td></strong> <td>$textbookAuthor</td></tr>
 							<tr><td><strong>Edition</strong></td> <td>" .ordinal($textbookEdition). "</td></tr>
-							<tr><td><strong>Description:</strong></td> <td><input type='text' id='listingDescription' name='listingDescription' class='sell-input'></td></tr>
-							<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Good / Contains Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
-							<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' id='subjectName' name='subjectName' class='sell-input'></td></tr> -->
-							<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' id='listingPrice' name='listingPrice' class='sell-input'></td></tr>
+							<tr><td><strong>Description:</strong></td> <td><input type='text' class='form-control' id='listingDescription' name='listingDescription'></td></tr>
+							<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality' class='form-control'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Good / Contains Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
+							<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' class='form-control' id='subjectName' name='subjectName'></td></tr> -->
+							<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' class='form-control' id='listingPrice' name='listingPrice'></td></tr>
 						</tbody>
 					</table>
 					<input type='hidden' name='textbookISBN' value='$textbookISBN'>
-					<button name='sell' class='btn btn-dark flex auto'>Sell</button>
+					<button name='sell' class='btn btn-primary d-flex auto'>Sell</button>
 				</form>
 			</div>
 		";
@@ -113,7 +113,7 @@ if(!$result->num_rows > 0) {
 	$row = $result->fetch_assoc();
 
 	echo "
-		<div class='flex justify-content-center align-items-center'>
+		<div class='d-flex justify-content-center align-items-center'>
 			<img src='$row[textbookURL]' class='search-img' alt='A picture for the book $row[textbookTitle] is available.'>
 			<form action='' method='POST'>
 				<table class='table'>
@@ -122,14 +122,14 @@ if(!$result->num_rows > 0) {
 						<tr><td><strong>Year</strong></td> <td>$row[textbookYear]</td></tr>
 						<tr><td><strong>Authors</td></strong> <td>$row[textbookAuthor]</td></tr>
 						<tr><td><strong>Edition</strong></td> <td>" .ordinal($row['textbookEdition']). "</td></tr>
-						<tr><td><strong>Description:</strong></td> <td><input type='text' id='listingDescription' name='listingDescription' class='sell-input'></td></tr>
-						<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Good / Contains Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
-						<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' id='subjectName' name='subjectName' class='sell-input'></td></tr> -->
-						<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' id='listingPrice' name='listingPrice' class='sell-input'></td></tr>
+						<tr><td><strong>Description:</strong></td> <td><input type='text' class='form-control' id='listingDescription' name='listingDescription'></td></tr>
+						<tr><td><strong>Quality:</strong></td> <td><select name='listingQuality' class='form-control'><option value='1'>1 - Tearing Apart</option><option value='2'>2 - Poor Quality</option><option value='3'>3 - Average</option><option value='4'>4 - Good / Contains Highlighting</option><option value='5' selected>5 - Excellent</option></select></td></tr>
+						<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' class='form-control' id='subjectName' name='subjectName'></td></tr> -->
+						<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' class='form-control' id='listingPrice' name='listingPrice'></td></tr>
 					</tbody>
 				</table>
 				<input type='hidden' name='textbookISBN' value='$textbookISBN'>
-				<button name='sell' class='btn btn-dark flex auto'>Sell</button>
+				<button name='sell' class='btn btn-primary d-flex auto'>Sell</button>
 			</form>
 		</div>
 	";

@@ -84,60 +84,58 @@
 			<?php include '../includes/navbar.php'; ?>
 
 		<!-- Landing -->
-			<div class="page-section bg-blue">
-				<div class="container landing text-d-white">
-                    <h1 class="landing-heading h-white">Create an Account</h1>
-                    <p><span class="brand">UniStudyMate</span> is absolutely free and easy to use!</p>
-					<p>Simply sign up, advertise your books and notes and let the buyer contact you!</p>
-				</div>
+			<div class="container-fluid page-section bg-blue text-center text-d-white">
+                <h1 class="landing-heading h-white">Create an Account</h1>
+                <p><span class="brand">UniStudyMate</span> is absolutely free and easy to use!</p>
+                <p>Simply sign up, advertise your books and notes and let the buyer contact you!</p>
 			</div>
 
 		<!-- Create an Account Form -->
-			<div class="page-section">
-				<div class="container">
-                    <form action="" method="POST" class="page-section details-form">
-                        <div class="form-row">
-                            <label for="userName">First Name: <span class="text-red">*</span></label>
-                            <input type="text" id="userName" name="userName" >
-                        </div>
-                        <div class="form-row">
-                            <label for="userEmail">Email: <span class="text-red">*</span></label>
-                            <input type="email" id="userEmail" name="email" required>
-                        </div>
-                        <div class="form-row">
-                            <label for="userPhone">Mobile: (Recommended)</label>
-                            <input type="tel" id="userPhone" name="phone">
-                        </div>
-                        <div class="form-row">
-                            <label for="universityID">University: <span class="text-red">*</span></label><br/>
-                            <select id="universityID" name="universityID">
-                                <option>-- Select a University --</option>
-                                <?php
-                                    $sql_universities = $conn->query("SELECT * FROM universities ORDER BY universityCountry ASC, universityName ASC");
+			<div class="container page-section">
+                <form action="" method="POST" class="page-section details-form">
+                    <div class="form-group">
+                        <label for="userName">First Name: <span class="text-red">*</span></label>
+                        <input type="text" class="form-control" id="userName" name="userName" >
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Email: <span class="text-red">*</span></label>
+                        <input type="email" class="form-control" id="userEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPhone">Mobile: (Recommended)</label>
+                        <input type="tel" class="form-control" id="userPhone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="universityID">University: <span class="text-red">*</span></label><br/>
+                        <select class="form-control" id="universityID" name="universityID">
+                            <option>-- Select a University --</option>
+                            <?php
+                                $sql_universities = $conn->query("SELECT * FROM universities ORDER BY universityCountry ASC, universityName ASC");
 
-                                    while ($row = $sql_universities->fetch_assoc()) {
-                                        $universityID = $row['universityID'];
-                                        $universityName = $row['universityName'];
-                                        $universityShortCountry = $row['universityShortCountry'];
+                                while ($row = $sql_universities->fetch_assoc()) {
+                                    $universityID = $row['universityID'];
+                                    $universityName = $row['universityName'];
+                                    $universityShortCountry = $row['universityShortCountry'];
 
-                                        echo "
-                                            <option value='$universityID'>$universityShortCountry - $universityName</option>
-                                        ";
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-row">
-                            <label for="userPassword">Password <span class="text-red">*</span></label>
-                            <input type="password" name="password">
-                        </div>
-                        <div class="form-row flex justify-content-center">
-                            <?php require __DIR__ . '/../includes/recaptcha.php'; ?>
-                        </div>
-                        <button name="submit" class="btn btn-dark btn-block" style="margin-bottom: 50px;">Sign Up</button>
-                    </form>
-                </div>
+                                    echo "
+                                        <option value='$universityID'>$universityShortCountry - $universityName</option>
+                                    ";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword">Password <span class="text-red">*</span></label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                    <div class="form-group d-flex justify-content-center">
+                        <?php require __DIR__ . '/../includes/recaptcha.php'; ?>
+                    </div>
+                    <button name="submit" class="btn btn-success btn-block mb-5">Sign Up</button>
+                </form>
             </div>
         
         <!-- Footer -->
             <?php include '../includes/footer.php' ?>
+    </body>
+</html>

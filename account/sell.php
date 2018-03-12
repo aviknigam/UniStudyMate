@@ -56,34 +56,28 @@
 			<?php include '../includes/navbar.php'; ?>
 
 		<!-- Landing -->
-			<div class="page-section bg-blue">
-				<div class="container landing">
-					<h1 class="landing-heading h-white">Sell a Textbook</h1>
-				</div>
+			<div class="container-fluid page-section bg-blue text-center">
+				<h1 class="landing-heading h-white">Sell a Textbook</h1>
 			</div>			
 
 		<!-- Sell Textbook -->
-			<div class="page-section">
-				<div class="container flex ffcolwrap align-items-center">
-                    <form id="textbookSearch">
-                        <label for="textbookISBN">Enter 13 digit textbook ISBN (no dashes): </label>
-                        <input type="text" name="textbookISBN" id="textbookISBN" required>
-                        <button class="btn btn-dark">Search</button>
-					</form>
-					<div id="loader" class="hide">
-						<img src="/dist/img/loader.gif" alt="Loading results...">
-					</div>
+			<div class="container page-section d-flex flex-column align-items-center">
+				<form id="textbookSearch">
+					<label for="textbookISBN">Enter 13 digit textbook ISBN (no dashes): </label>
+					<input type="text" name="textbookISBN" id="textbookISBN" required>
+					<button class="btn btn-primary">Search</button>
+				</form>
+				<div id="loader" class="hide">
+					<img src="/dist/img/loader.gif" alt="Loading results...">
 				</div>
 			</div>
         
         <!-- Search Results -->
-            <div class="page-section">
-                <div class="container">
-                    <div id="searchResults" class="flex ffcolwrap align-items-center">
-						<img src="https://isbnsearch.org/images/isbn-location.png" alt="The ISBN is typically found above the barcode">
-						<p>Typical location of an ISBN is on the back of the book.</p>
-                    </div>
-                </div>
+            <div class="container page-section">
+				<div id="searchResults" class="d-flex flex-column align-items-center">
+					<img src="https://isbnsearch.org/images/isbn-location.png" alt="The ISBN is typically found above the barcode">
+					<p>Typical location of an ISBN is on the back of the book.</p>
+				</div>
 			</div>
 			
 		<!-- Footer -->

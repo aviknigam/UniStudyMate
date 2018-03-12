@@ -55,34 +55,30 @@
 			<?php include '../includes/navbar.php'; ?>
 
 		<!-- Landing -->
-			<div class="page-section bg-blue">
-				<div class="container landing text-d-white">
-					<h1 class="landing-heading h-white">Log in to <span class="brand">UniStudyMate:</span></h1>
-					<p>Due to the recent merge from utstextbooks.com, your same login will work!</p>
-				</div>
+			<div class="container-fluid page-section bg-blue text-center text-d-white">
+				<h1 class="landing-heading h-white">Log in to <span class="brand">UniStudyMate:</span></h1>
+				<p>Due to the recent merge from utstextbooks.com, your same login will work!</p>
 			</div>
 
 		<!-- Login Form -->
-			<div class="page-section">
-				<div class="container">
-					<form action="" method="POST" class="page-section login-form">
-						<div class="form-row">
-							<label for="email">Email: <span class="text-red">*</span></label>
-							<input type="email" name="email" required autofocus>
-						</div>
-						<div class="form-row">
-							<label for="password">Password: <span class="text-red">*</span></label>
-							<input type="password" name="password" required>
-						</div>
-						<div class="form-row flex justify-content-center">
-							<?php require __DIR__ . '/../includes/recaptcha.php'; ?>
-						</div>
-						<button class="btn btn-dark btn-block" name="submit">Login</button>
-					</form>
-					<div class="flex ffcolwrap align-items-center text-grey">
-						<p><a href="/account/recover" class="text-blue">Forgot password?</a></p>
-						<a href="/account/register"><button class="btn btn-dark">Sign up for free</button></a>
+			<div class="container page-section">
+				<form action="" method="POST" class="page-section login-form">
+					<div class="form-group">
+						<label for="email">Email: <span class="text-red">*</span></label>
+						<input type="email" class="form-control" name="email" required autofocus>
 					</div>
+					<div class="form-group">
+						<label for="password">Password: <span class="text-red">*</span></label>
+						<input type="password" class="form-control" name="password" required>
+					</div>
+					<div class="form-group d-flex justify-content-center">
+						<?php require __DIR__ . '/../includes/recaptcha.php'; ?>
+					</div>
+					<button class="btn btn-success btn-block" name="submit">Login</button>
+				</form>
+				<div class="d-flex flex-column align-items-center text-grey">
+					<p><a href="/account/recover" class="text-blue">Forgot password?</a></p>
+					<a href="/account/register" class="btn btn-primary">Sign up for free</a>
 				</div>
 			</div>
 

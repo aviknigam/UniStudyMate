@@ -46,79 +46,75 @@
 			<?php include '../includes/navbar.php'; ?>
 
 		<!-- Landing -->
-			<div class="page-section bg-blue">
-				<div class="container landing">
-					<h1 class="landing-heading h-white">Update Listing</h1>
-				</div>
+			<div class="container-fluid page-section bg-blue text-center">
+				<h1 class="landing-heading h-white">Update Listing</h1>
 			</div>			
 
 		<!-- Update Listing -->
-			<div class="page-section">
-				<div class="container">
-					<?php
-						$sql_listings = $conn->prepare("SELECT * FROM listings WHERE listingID = ? AND userID = ?");
-						$sql_listings->bind_param("ss", $listingID, $userID);
-						$sql_listings->execute();
-						$sql_listings = $sql_listings->get_result();
+			<div class="container page-section">
+				<?php
+					$sql_listings = $conn->prepare("SELECT * FROM listings WHERE listingID = ? AND userID = ?");
+					$sql_listings->bind_param("ss", $listingID, $userID);
+					$sql_listings->execute();
+					$sql_listings = $sql_listings->get_result();
 
-						if ($row = $sql_listings->fetch_assoc()) {
-							$textbookID = $row['textbookID'];
-							$listingPrice = $row['listingPrice'];
-							$listingQuality = $row['listingQuality'];
-							$listingDescription = $row['listingDescription'];
+					if ($row = $sql_listings->fetch_assoc()) {
+						$textbookID = $row['textbookID'];
+						$listingPrice = $row['listingPrice'];
+						$listingQuality = $row['listingQuality'];
+						$listingDescription = $row['listingDescription'];
 
-							$sql_textbooks = $conn->query("SELECT * FROM textbooks LEFT JOIN listings ON textbooks.textbookID = listings.textbookID WHERE listings.textbookID = $textbookID");
-							
-							while ($row = $sql_textbooks->fetch_assoc()){
-								$textbookISBN = $row['textbookISBN'];
-								$textbookTitle = $row['textbookTitle'];
-								$textbookYear = $row['textbookYear'];
-								$textbookAuthor = $row['textbookAuthor'];
-								$textbookEdition = $row['textbookEdition'];
-								$textbookURL = $row['textbookURL'];
-							}
-							
-						} else {
-							echo 'Book not found under this user. Please <a href="/account/" class="text-blue">go back</a> Error code x003.';
-							echo '</div></div>';
-							include '../includes/footer.php';
-							die();
+						$sql_textbooks = $conn->query("SELECT * FROM textbooks LEFT JOIN listings ON textbooks.textbookID = listings.textbookID WHERE listings.textbookID = $textbookID");
+						
+						while ($row = $sql_textbooks->fetch_assoc()){
+							$textbookISBN = $row['textbookISBN'];
+							$textbookTitle = $row['textbookTitle'];
+							$textbookYear = $row['textbookYear'];
+							$textbookAuthor = $row['textbookAuthor'];
+							$textbookEdition = $row['textbookEdition'];
+							$textbookURL = $row['textbookURL'];
 						}
 						
-						echo "
-							<div class='flex justify-content-center align-items-center'>
-								<img src='$textbookURL' class='search-img' alt='A picture for the book $textbookTitle is available.'>
-								<form action='' method='POST'>
-									<table class='table'>
-										<tbody>
-											<tr><td><strong>Title</strong></td> <td>$textbookTitle</td></tr>
-											<tr><td><strong>Year</strong></td> <td>$textbookYear</td></tr>
-											<tr><td><strong>Authors</strong></td> <td>$textbookAuthor</td></tr>
-											<tr><td><strong>Edition</strong></td> <td>" .ordinal($textbookEdition). "</td></tr>
-											<tr><td><strong>Description:</strong></td> <td><input type='text' id='listingDescription' name='listingDescription' value='$listingDescription' class='sell-input'></td></tr>
-											<tr>
-												<td><strong>Quality:</strong></td>
-												<td>
-													<select name='listingQuality'>
-														<option value='1' "; if ($listingQuality == 1) {echo 'selected';} echo ">1 - Tearing Apart</option>
-														<option value='2' "; if ($listingQuality == 2) {echo 'selected';} echo ">2 - Poor Quality</option>
-														<option value='3' "; if ($listingQuality == 3) {echo 'selected';} echo ">3 - Average</option>
-														<option value='4' "; if ($listingQuality == 4) {echo 'selected';} echo ">4 - Good / Contains Highlighting</option>
-														<option value='5' "; if ($listingQuality == 5) {echo 'selected';} echo ">5 - Excellent</option>
-													</select>
-												</td>
-											</tr>
-											<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' id='subjectName' name='subjectName' class='sell-input'></td></tr> -->
-											<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' id='listingPrice' name='listingPrice' value='$listingPrice' class='sell-input'></td></tr>
-										</tbody>
-									</table>
-									<input type='hidden' name='listingID' value='$listingID'>
-									<button name='update' class='btn btn-dark flex auto'>Update</button>
-								</form>
-							</div>
-						";
-					?>
-				</div>
+					} else {
+						echo 'Book not found under this user. Please <a href="/account/" class="text-blue">go back</a> Error code x003.';
+						echo '</div></div>';
+						include '../includes/footer.php';
+						die();
+					}
+					
+					echo "
+						<div class='d-flex justify-content-center align-items-center'>
+							<img src='$textbookURL' class='search-img' alt='A picture for the book $textbookTitle is available.'>
+							<form action='' method='POST'>
+								<table class='table'>
+									<tbody>
+										<tr><td><strong>Title</strong></td> <td>$textbookTitle</td></tr>
+										<tr><td><strong>Year</strong></td> <td>$textbookYear</td></tr>
+										<tr><td><strong>Authors</strong></td> <td>$textbookAuthor</td></tr>
+										<tr><td><strong>Edition</strong></td> <td>" .ordinal($textbookEdition). "</td></tr>
+										<tr><td><strong>Description:</strong></td> <td><input type='text' class='form-control' id='listingDescription' name='listingDescription' value='$listingDescription'></td></tr>
+										<tr>
+											<td><strong>Quality:</strong></td>
+											<td>
+												<select name='listingQuality' class='form-control'>
+													<option value='1' "; if ($listingQuality == 1) {echo 'selected';} echo ">1 - Tearing Apart</option>
+													<option value='2' "; if ($listingQuality == 2) {echo 'selected';} echo ">2 - Poor Quality</option>
+													<option value='3' "; if ($listingQuality == 3) {echo 'selected';} echo ">3 - Average</option>
+													<option value='4' "; if ($listingQuality == 4) {echo 'selected';} echo ">4 - Good / Contains Highlighting</option>
+													<option value='5' "; if ($listingQuality == 5) {echo 'selected';} echo ">5 - Excellent</option>
+												</select>
+											</td>
+										</tr>
+										<!-- <tr><td><strong>Subjects/Papers used for:</strong></td> <td><input type='text' class='form-control' id='subjectName' name='subjectName'></td></tr> -->
+										<tr><td><strong>Price ($)<span class='text-red'>*</span></strong></td> <td><input type='number' class='form-control' id='listingPrice' name='listingPrice' value='$listingPrice'></td></tr>
+									</tbody>
+								</table>
+								<input type='hidden' name='listingID' value='$listingID'>
+								<button name='update' class='btn btn-primary d-flex auto'>Update</button>
+							</form>
+						</div>
+					";
+				?>
 			</div>
 			
 		<!-- Footer -->
