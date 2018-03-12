@@ -36,8 +36,10 @@
         <meta name="twitter:image:src" content="<?= $configURL ?>/dist/img/favicon/android-chrome-256x256.jpg" />
 
         <!-- Normalize CSS -->
-        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/7.0.0/normalize.css">
+        <!-- <link rel="stylesheet" href="https://necolas.github.io/normalize.css/7.0.0/normalize.css"> -->
         <!-- Font Awesome -->
         <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="/dist/css/app.css?<?php echo time(); ?>">
