@@ -118,53 +118,48 @@
 			<?php include '../includes/navbar.php'; ?>
 
 		<!-- Landing -->
-			<div class="page-section bg-blue">
-				<div class="container landing">
-					<?= "<h1 class='landing-heading h-white'>Buy $textbookTitle for $$listingPrice</h1>"; ?>
-				</div>
+			<div class="container-fluid page-section bg-blue text-center">
+				<?= "<h1 class='landing-heading h-white'>Buy $textbookTitle for $$listingPrice</h1>"; ?>
 			</div>
 
 		<!-- Textbook Table -->
-			<div class="page-section">
-				<div class="container">
-					<div class='viewtextbook'>
-						<?php
-							if (!empty($textbookURL)) {
-								echo "<img src='$textbookURL' class='search-img' alt='A picture for the book $textbookTitle is available.'>";
+			<div class="container page-section">
+				<div class='viewtextbook'>
+					<?php
+						if (!empty($textbookURL)) {
+							echo "<img src='$textbookURL' class='search-img' alt='A picture for the book $textbookTitle is available.'>";
 
-							}
+						}
 
-							echo "
-								<div>
-									<table class='table'>
-										<tbody>
-											<tr><td><strong>Title</strong></td> <td>$textbookTitle</td></tr>
-											<tr><td><strong>Year</strong></td> <td>$textbookYear</td></tr>
-											<tr><td><strong>Authors</strong></td> <td>$textbookAuthor</td></tr>
-											<tr><td><strong>Edition</strong></td> <td>" .ordinal($textbookEdition). "</td></tr>
-											<tr><td><strong>Description</strong></td> <td>$listingDescription</td></tr>
-											<tr><td><strong>Quality</strong></td> <td>$listingQuality/5</td></tr>
-											<tr><td><strong>Current</strong></td> <td>$listingDate</td></tr>
-											<tr><td><strong>Price</strong></td> <td><strong>$$listingPrice</strong></td></tr>
-											<tr><td><strong>University</strong></td> <td><strong>$universityShortCountry - $universityName</strong></td></tr>
-										</tbody>
-									</table>
-								</div>
-							";
-						?>
-					</div>
-                    <?php include '../includes/ads-responsive.php'; ?>
+						echo "
+							<div>
+								<table class='table'>
+									<tbody>
+										<tr><td><strong>Title</strong></td> <td>$textbookTitle</td></tr>
+										<tr><td><strong>Year</strong></td> <td>$textbookYear</td></tr>
+										<tr><td><strong>Authors</strong></td> <td>$textbookAuthor</td></tr>
+										<tr><td><strong>Edition</strong></td> <td>" .ordinal($textbookEdition). "</td></tr>
+										<tr><td><strong>Description</strong></td> <td>$listingDescription</td></tr>
+										<tr><td><strong>Quality</strong></td> <td>$listingQuality/5</td></tr>
+										<tr><td><strong>Current</strong></td> <td>$listingDate</td></tr>
+										<tr><td><strong>Price</strong></td> <td><strong>$$listingPrice</strong></td></tr>
+										<tr><td><strong>University</strong></td> <td><strong>$universityShortCountry - $universityName</strong></td></tr>
+									</tbody>
+								</table>
+							</div>
+						";
+					?>
 				</div>
+				<?php include '../includes/ads-responsive.php'; ?>
 			</div>
 		
 		<!-- Contact Form -->
-			<div class="page-section">
-				<div class="container">
+			<div class="container page-section">
 					<h2 class="h-grey">Contact the Seller:</h2>
 
 					<?php
 						if (!empty($userPhone) || $userAgree != 0) {
-							echo "<p>$userName has made their phone number available: <a href='tel:$userPhone' class='text-blue'>$userPhone</a>. You can also contact them using the form below.</p>";
+							echo "<div class='alert alert-success'>$userName has made their phone number available: <a href='tel:$userPhone' class='text-blue'>$userPhone</a></div><p>You can also contact them using the form below.</p>";
 
 						} else {
 							echo "<p>$userName has not agreed to make their phone number available. Please email them using the form below.";
@@ -181,19 +176,18 @@
 						</div>
 						<div class="form-row">
 							<label for="phone">Phone: <span class="text-red">*</label>
-							<input type="text" name="phone" placeholder="Recommended" required>
+							<input type="text" name="phone" placeholder="Recommended">
 						</div>
 						<div class="form-row">
 							<label for="message">Message: <span class="text-red">*</label>
 							<textarea name="message" rows="6" required><?= "Hi $userName, \n \nI would like to purchase this book for $$listingPrice. I am happy to meetup on the campus of $universityName.\n \nThanks" ?></textarea>
 						</div>
-						<div class="form-row flex justify-content-center">
+						<div class="form-row d-flex justify-content-center">
 							<?php include '../includes/recaptcha.php'; ?>
 						</div>
-						<button name="submit" class="btn btn-dark flex auto">Submit</button>
+						<button name="submit" class="btn btn-primary d-flex auto">Submit</button>
 					</form>
                     <?php include '../includes/ads-responsive.php'; ?>
-				</div>
 			</div>
 		
 		<!-- Footer -->
