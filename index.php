@@ -33,8 +33,8 @@
 					while ($row = $sql_users->fetch_assoc()) {
 						echo "
 							<div class='container text-center'>
-								<h2 class='h-grey text-center my-4'>$row[userID] members and counting!</h2>
-								<a href='/account/register' class='btn btn-primary btn-lg'>Join today!</a>
+								<!-- <h2 class='h-grey text-center my-4'>$row[userID] members and counting!</h2> -->
+								<a href='/account/register' class='btn btn-primary btn-lg mt-4'>Join today!</a>
 							</div>
 						";
 					}
