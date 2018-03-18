@@ -8,7 +8,6 @@
 		header('Location: ./');
 	}
 
-	
 	if (isset($_POST['sendEmail'])) {
 		$userEmail = sanitize($_POST['email']);
 		
@@ -38,9 +37,10 @@
 					<h3>If you have forgotten your password, use the link below to reset it</h3>
 					<p>Hi $userName, it seems like you have requested an email to reset your password through our secure online form.</p><br/>
 					<hr>
-					<p><a href='https://unistudymate.com/account/recover?userID=$userID&token=$token'>https://unistudymate.com/account/recover?userID=$userID&token=$token</a></p>
+					<br/>
+					<p><b><a href='https://unistudymate.com/account/recover?userID=$userID&token=$token'>https://unistudymate.com/account/recover?userID=$userID&token=$token</a></b></p><br/>
 					<p>Please use the link above to reset your password. If you cannot click on it, please cut and paste it into your browser address bar.</p><br/>
-					<p><b>If you did not request a password change, simply ignore this email. Your account is protected at all times.</p><br/>
+					<p><b>If you did not request a password change, simply ignore this email. Your account is protected at all times.</b></p><br/>
 					<p>Remember to tell your friends of $configTitle! <br/><br/><b>Communications Team, </b><br/>contact@unistudymate.com <br/><a href=\"$configURL\">$configURL</a></p>
 				</body>
 			</html>
@@ -69,8 +69,8 @@
 			$sql_users->bind_param("s", $encrypted_password);
 			$sql_users->execute();
 
-			$sql_recover = $conn->prepare("UPDATE recover SET userToken = null WHERE userID = ? AND userToken = ?");
-			$sql_recover->bind_param("ss", $userID, $userToken);
+			$sql_recover = $conn->prepare("UPDATE recover SET userToken = NULL WHERE userID = $userID AND userToken = ?");
+			$sql_recover->bind_param("s", $userToken);
 			$sql_recover->execute();
 
 			header('Location: ./');
